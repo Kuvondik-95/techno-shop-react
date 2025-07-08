@@ -1,0 +1,83 @@
+.header-section{
+  width: 100%;
+  background: #CCEFDB;
+  background: linear-gradient(268deg, rgba(204, 239, 219, 1) 0%, rgba(255, 255, 255, 1) 53%, rgba(255, 243, 224, 1) 100%);
+  height: auto;
+  margin-top: 40px;
+}
+
+.header-section .header-container{
+  height: 390px;
+}
+
+.header-section .header-container .header-frame{
+  display: flex;
+  flex-direction: row;
+}
+
+.header-section .header-container .header-frame .header-frame-left{
+  width: 100%;
+}
+.header-section .header-container .header-frame .header-frame-left .header-title{
+  font-size: 36px;
+  color: #FFB762;
+  margin-top: 98px;
+}
+.header-section .header-container .header-frame .header-frame-left .header-btn{
+  width: 188px;
+  height: 40px;
+  background-color: #00C65E;
+  color: white;
+  margin-top: 30px;
+}
+
+.header-section .header-container .header-frame .header-frame-right{
+  width: 100%;
+  position: relative;
+}
+
+.header-section .header-container .header-frame .header-frame-right .header-image-1{
+  position: absolute;
+  width: 299px;
+  height: 239px;
+  rotate: 17deg;
+  top: 30px;
+  z-index: 20;
+}
+.header-section .header-container .header-frame .header-frame-right .header-image-2{
+  position: absolute;
+  width: 147px;
+  height: 245px;
+  rotate: -17deg;
+  right: 197px;
+  top: 170px;
+  z-index: 20;
+}
+
+.header-section .header-container .header-frame .header-frame-right .header-image-3{
+  position: absolute;
+  width: 272px;
+  height: 272px;
+  rotate: -7deg;
+  right: 0px;
+  top: -10px;
+}
+
+.header-section .header-container .header-frame .header-frame-right .header-image-4{
+  position: absolute;
+  width: 267px;
+  height: 267px;
+  rotate: 15deg;
+  right: -150px;
+  top: 140px;
+}
+
+.header-section .header-container .header-frame .header-frame-right .header-shape-1{
+  position: absolute;
+  width: 124px;
+  height: 149px;
+  rotate: 17deg;
+  top: 10px;
+  left: 70px;
+  z-index: 10;
+}
