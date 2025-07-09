@@ -43,7 +43,7 @@ export default function Brands(){
               />
             </Card>
             <Card className="card">
-              <Typography className="samsung">SONY</Typography>
+              <Typography className="sony">SONY</Typography>
             </Card>
             <Card className="card">
               <img 

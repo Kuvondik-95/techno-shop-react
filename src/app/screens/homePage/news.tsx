@@ -8,8 +8,7 @@ export default function News(){
   return <div className="news-section">
     <Container className="news-container">
       <Stack className="news-frame">
-
-
+        
       </Stack>
     </Container>
   </div>

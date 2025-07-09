@@ -6,6 +6,7 @@ import NewProducts from "./newProducts";
 import Advertisement from "./advertisement";
 import News from "./news";
 import Brands from "./Brands";
+import Services from "./services";
 
 
 export default function HomePage(){
@@ -38,6 +39,7 @@ export default function HomePage(){
   <Advertisement/>
   <News/>
   <Brands/>
+  <Services/>
   </>
 );
 

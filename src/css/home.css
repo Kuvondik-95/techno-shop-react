@@ -369,6 +369,9 @@
   color: white;
 }
 
+
+
+
 /* NEWS SECTION */
 
 .news-section{
@@ -381,6 +384,7 @@
   margin: 0 auto;
   background-color: aqua;
   height: 270px;
+  
 }
 
 
@@ -456,4 +460,98 @@
   line-break: loose;
   letter-spacing: 2px;
   font-size: 22px;
+}
+
+.brands-section .brands-container .brands-frame .brands-cards-frame .card .sony{
+  font-family: "TT Norms";
+  font-weight: 900;
+  line-break: loose;
+  letter-spacing: 2px;
+  font-size: 24px;
+}
+
+
+
+
+/* SERVICES SECTION */
+.services-section{
+  width: 100%;
+  height: auto;
+}
+.services-section .services-container{
+  height: auto;
+  margin-top: 80px;
+}
+
+.services-section .services-container .services-frame{
+  width: 1170px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 auto;
+}
+
+.services-section .services-container .services-frame .services-titles{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* padding: 0 36px; */
+}
+
+.services-section .services-container .services-frame .services-titles .title{
+  font-size: 32px;
+  font-weight: 700;
+}
+  
+.services-section .services-container .services-frame .services-titles .view-all{
+  text-decoration: none;
+  align-self: end;
+  font-size: 14px;
+  font-weight: 500;
+  color: #363A45;
+  cursor: pointer;
+}
+
+.services-section .services-container .services-frame .services-cards-frame{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 24px;
+}
+
+.services-section .services-container .services-frame .services-cards-frame .card{
+  width: 175px;
+  height: 150px;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 13px 20px 13px;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.services-section .services-container .services-frame .services-cards-frame .card .title{
+  font-family: "TT Norms";
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.services-section .services-container .services-frame .services-cards-frame .card .icon-box{
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: #CCEFDB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.services-section .services-container .services-frame .services-cards-frame .card .icon-box .icon{
+  width: 80px;
+  height: 80px;
 }
