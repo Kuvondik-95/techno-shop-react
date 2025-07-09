@@ -8,7 +8,8 @@ import theme from "./app/MaterialTheme";
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter as Router } from 'react-router-dom';
-
+import { CssVarsProvider } from '@mui/joy/styles';
+import {CssBaseline as CssBaselineJoy} from '@mui/joy';
 
 import './css/index.css';
 

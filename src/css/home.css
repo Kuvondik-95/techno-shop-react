@@ -81,3 +81,112 @@
   left: 70px;
   z-index: 10;
 }
+
+
+
+
+/* POPULAR PRODUCTS SECTION */
+
+.popular-products-section{
+  width: 100%;
+  height: auto;
+}
+.popular-products-section .popular-container{
+  height: auto;
+  margin-top: 80px;
+}
+
+.popular-products-section .popular-container .popular-frame{
+  width: 1170px;
+  height: 465px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 auto;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-titles{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* padding: 0 36px; */
+}
+
+.popular-products-section .popular-container .popular-frame .popular-titles .title{
+  font-size: 32px;
+  font-weight: 700;
+}
+  
+.popular-products-section .popular-container .popular-frame .popular-titles .view-all{
+  text-decoration: none;
+  align-self: end;
+  font-size: 14px;
+  font-weight: 500;
+  color: #363A45;
+  cursor: pointer;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-cards-frame{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 25px;
+}
+
+/* CARD */
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card{
+  border: none;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .card-img-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .card-content{
+  margin-bottom: 0;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .card-content .product-category{
+  color: #DADCDC;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .card-content a{
+  margin-top: 8px;
+  font-weight: 500;
+  font-size: 16px;
+}
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .card-content .product-price{
+  font-size: 18px;
+  font-weight: 700;
+  color: #00C65E;
+  margin-top: 10px;
+}
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .card-content .product-left{
+  color: #bdbdbd;
+  margin-top: 3px;
+}
+
+.popular-products-section .popular-container .popular-frame .popular-cards-frame .card .shopping-btn{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  margin-bottom: 20px;
+  height: 30px;
+  background-color: white;
+  color: black;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  align-items: center;
+  padding-top: 3px;
+}
+
+
+
+
+
+

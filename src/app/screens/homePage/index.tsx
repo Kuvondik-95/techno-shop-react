@@ -1,10 +1,13 @@
 import { Container, Stack, Box, Typography, Button } from "@mui/material";
 import React from "react";
 import "../../../css/home.css"
+import PopularProducts from "./popularProducts";
 
 
 export default function HomePage(){
-  return <div className="header-section">
+  return (
+  <>
+  <div className="header-section">
     <Container className="header-container">
       <Stack className="header-frame">
         
@@ -25,4 +28,9 @@ export default function HomePage(){
       </Stack>
     </Container>
   </div>
+
+  <PopularProducts/>
+  </>
+);
+
 }
