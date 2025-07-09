@@ -2,6 +2,10 @@ import { Container, Stack, Box, Typography, Button } from "@mui/material";
 import React from "react";
 import "../../../css/home.css"
 import PopularProducts from "./popularProducts";
+import NewProducts from "./newProducts";
+import Advertisement from "./advertisement";
+import News from "./news";
+import Brands from "./Brands";
 
 
 export default function HomePage(){
@@ -30,6 +34,10 @@ export default function HomePage(){
   </div>
 
   <PopularProducts/>
+  <NewProducts/>
+  <Advertisement/>
+  <News/>
+  <Brands/>
   </>
 );
 
