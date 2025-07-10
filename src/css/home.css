@@ -382,12 +382,86 @@
 .news-section .news-container .news-frame{
   width: 1170px;
   margin: 0 auto;
-  background-color: aqua;
   height: 270px;
-  
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 8px;
 }
 
+.news-section .news-container .news-frame .swiper-frame{
+  width: 100%;
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
 
+.news-section .news-container .news-frame .swiper-frame .swiper-slide{
+  width: 100%;
+  height: 270px;
+  border-radius: 8px;
+}
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack{
+  width: 100%;
+  height: 270px;
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  background: linear-gradient(90deg,rgba(255, 255, 255, 1) 68%, rgba(196, 242, 218, 1) 100%);
+  border-radius: 8px;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-left{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 0 42px 70px;
+  box-sizing: border-box;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-left .title-top{
+  font-family: "TT Norms";
+  font-size: 32px;
+  font-weight: 700;
+  color: #00C65E;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-left .middle-titles .title-big{
+  font-family: "TT Norms";
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-left .middle-titles .title-small{
+  font-family: "TT Norms";
+  font-size: 14px;
+  font-weight: 500;
+  color: #363A45;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-left .buy-btn{
+  width: 170px;
+  height: 41px;
+  background-color: #00C65E;
+  color: white;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-right{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 90px;
+}
+
+.news-section .news-container .news-frame .swiper-frame .swiper-slide .slide-stack .slide-right img{
+  width: 280px;
+  height: 264px;
+}
 
 
 
