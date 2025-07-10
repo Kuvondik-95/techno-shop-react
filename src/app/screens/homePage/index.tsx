@@ -7,6 +7,7 @@ import Advertisement from "./advertisement";
 import News from "./news";
 import Brands from "./Brands";
 import Services from "./services";
+import ActiveUsers from "./activeUsers";
 
 
 export default function HomePage(){
@@ -40,6 +41,7 @@ export default function HomePage(){
   <News/>
   <Brands/>
   <Services/>
+  <ActiveUsers/>
   </>
 );
 

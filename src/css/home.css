@@ -629,3 +629,56 @@
   width: 80px;
   height: 80px;
 }
+
+
+/* ACTIVE USERS SECTION */
+.users-section{
+  width: 100%;
+  height: auto;
+}
+.users-section .users-container{
+  height: auto;
+  margin-top: 80px;
+}
+
+.users-section .users-container .users-frame{
+  width: 1170px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 0 auto;
+}
+
+.users-section .users-container .users-frame .users-titles{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* padding: 0 36px; */
+}
+
+.users-section .users-container .users-frame .users-titles .title{
+  font-size: 32px;
+  font-weight: 700;
+}
+  
+.users-section .users-container .users-frame .users-titles .view-all{
+  text-decoration: none;
+  align-self: end;
+  font-size: 14px;
+  font-weight: 500;
+  color: #363A45;
+  cursor: pointer;
+}
+
+.users-section .users-container .users-frame .users-cards-frame{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 24px;
+}
+
+.users-section .users-container .users-frame .users-cards-frame .card{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
