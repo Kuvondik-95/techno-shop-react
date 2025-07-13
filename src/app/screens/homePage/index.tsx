@@ -25,7 +25,7 @@ export default function HomePage(){
         </Stack>
         
         <Box className="header-frame-right">
-          <img src={"/img/circle8.svg"} alt="this is Phone" className="header-shape-1" />
+          
           <img src={"/img/image1.png"} alt="this is Phone" className="header-image-1" />
           <img src={"/img/image2.png"} alt="this is Phone" className="header-image-2" />
           <img src={"/img/image3.png"} alt="this is Phone" className="header-image-3" />

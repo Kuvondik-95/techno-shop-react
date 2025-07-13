@@ -1,12 +1,12 @@
 import { Container } from "@mui/material";
 
 
-export default function OrdersPage() {
+export default function PausedOrders() {
 
   return (
       <div className={"order-page"}>
         <Container className={"order-container"}>  
-          OrdersPage
+          PausedOrders
         </Container>
       </div>
   );
