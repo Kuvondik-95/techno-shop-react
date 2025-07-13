@@ -181,7 +181,268 @@
   padding-top: 3px;
 }
 
+.products-section .products-container .products-main-frame .pagination-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+
 
 
 
 /* CHOSEN PRODUCT */
+.chosen-product-section{
+  width: 100%;
+}
+
+.chosen-product-section .chosen-product-container .main-title{
+  text-align: center;
+  font-family: "TT Norms";
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame{
+  width: 1170px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 30px 50px 0 50px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .title{
+  font-family: "TT Norms";
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 570px;
+}
+
+/* CHOSEN PRODUCT: LEFT IMAGES */
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images{
+  width: 370px;
+  height: 100%;
+  /* border: 1px solid gray; */
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .main-img-box {
+  width: 370px;
+  height: 460px;
+  box-sizing: border-box;
+  padding: 15px 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #DADCDC;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .main-img-box .main-img{
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  /* mix-blend-mode:darken;  yuqoridagiga o'xshash backgroundni remove qiladi*/ 
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .basic-images{
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .basic-images .basic-box{
+  width: 100px;
+  height: 90px;
+  border: 1px solid #DADCDC;
+  border-radius: 8px;
+  mix-blend-mode: multiply;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .basic-images .basic-box .basic-img{
+  max-width: 90%;
+}
+
+
+
+
+
+
+/* CHOSEN PRODUCT: CENTER DETAILS */
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details{
+  width: 220px;
+  height: 325px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .memory-box{
+  margin-bottom: 30px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .memory-box .title{
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .memory-box .memory-buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .memory-box .memory-buttons .memory-btn{
+  border-radius: 10px;
+  padding: 12px 16px;
+  border: none;
+  text-decoration: none;
+  color: black;
+  /* box-shadow: rgba(111, 111, 112, 0.4) 0px 7px 29px 0px; */ 
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .colors-box{
+  margin-bottom: 30px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .colors-box .title {
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .colors-box .colors{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .colors-box .colors .color{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .details-box{
+  margin-bottom: 30px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .details-box .title{
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .details-box .details-stack .details-info{
+  font-family: "TT Norms";
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .details-box .details-stack .details-info .details-name{
+  font-family: "TT Norms";
+  font-size: 14px;
+  font-weight: 500;
+  color: gray;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .details .details-box .details-stack .all-info{
+  font-family: "TT Norms";
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+}
+
+
+
+
+
+
+
+/* CHOSEN PRODUCT: RIGHT PRICES */
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices{
+  width: 400px;
+  height: 182px;
+  /* border: 1px solid #DADCDC; */
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 25px 20px 30px 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .price-box{
+  font-family: "TT Norms";
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .price-box .price{
+  font-family: "TT Norms";
+  font-size: 24px;
+  font-weight: 700;
+  color: black;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .compare-box{
+  font-family: "TT Norms";
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 20px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .compare-box .icon{
+  vertical-align: middle;
+  font-size: 18px;
+  color: #00C65E;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .purchase-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .purchase-box .buy-btn {
+  width: 240px;
+  height: 40px;
+  background-color: #00C65E;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices .purchase-box .delivery-btn{
+  margin: 0;
+  padding: 0;
+  text-transform: capitalize;
+  color: black;
+  margin-right: 10px;
+  cursor: auto;
+  
+}

@@ -88,7 +88,9 @@ export default function OtherNavbar(){
     </div>
 
     <div className="img-frame">
-      
+      {/* <Box className="title-box">
+        <Typography className="title">"Your phone, your way"</Typography>
+      </Box> */}
     </div>
   </>
   )

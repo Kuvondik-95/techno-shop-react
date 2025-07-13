@@ -15,8 +15,8 @@ export default function ProductsPage(){
   return(
     <>
       <Routes>
-        <Route path={"/chosen"} element={<ChosenProduct/>} />
-        <Route path={"/"} element={<Products/>} />
+        <Route path={"/"} element={<ChosenProduct/>} />
+        <Route path={"/chosen"} element={<Products/>} />
       </Routes>
     </>
   )

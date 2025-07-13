@@ -24,6 +24,11 @@ import {
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+import Pagination from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 
 export default function Products(){
@@ -102,7 +107,7 @@ export default function Products(){
             
             <Stack className="products-frame">
               <CssVarsProvider>
-                {[1,2,3,4,5,6].map((ele, index) => {
+                {[1,2,3,4,5,6,7,8].map((ele, index) => {
                   return(
                     <Card 
                     key={index}
@@ -155,6 +160,17 @@ export default function Products(){
               </CssVarsProvider>
             </Stack>
           </Stack>
+          <Box className="pagination-box">
+            <Pagination
+              count={5}
+              renderItem={(item) => (
+                <PaginationItem
+                  slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                  {...item}
+                />
+              )}
+            />
+          </Box>
         </Stack>
       </Container>
     </div>
