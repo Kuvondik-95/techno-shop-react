@@ -56,14 +56,14 @@ export default function OtherNavbar(){
                 </NavLink>
             </Box>
 
-            <Box className={"link-item"}>
+            {/* <Box className={"link-item"}>
                 <NavLink 
                   to="/about"
                   className={({ isActive }) => (isActive ? 'active-link' : '')}
                 >
                   About us
                 </NavLink>
-            </Box>
+            </Box> */}
             
             <Box className={"link-item"}>
                 <NavLink 
