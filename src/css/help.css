@@ -2,16 +2,67 @@
   width: 100%;
   height: auto;
   display: flex;
+  flex-direction: column;
   /* background: #f8f8ff; */
-
+  
   .send-btn{
     background-color: blue;
     color: white;
   }
 }
+.help-page .addr-title{
+  font-family: "TT Norms";
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.help-page .our-address-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.help-page .our-address-container .address-box{
+  width: 500px;
+  height: 280px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #DADCDC;
+  border-radius: 10px;
+  background: #f8f8ff;
+}
+.help-page .our-address-container .address-box p{
+  margin-bottom: 15px;
+}
+.help-page .our-address-container .address-box p .icon{
+  color: #00C65E;
+  vertical-align: sub;
+  margin-right: 6px;
+  font-size: 24px;
+}
+.help-page .our-address-container .location-box{
+  width: 100%;
+}
+.help-page .our-address-container .location-box .location{
+  width: 100%;
+  border-radius: 10px;
+}
+
+
+.help-page .help-title{
+  font-family: "TT Norms";
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 50px;
+}
 
 .help-page .help-container {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
   flex-direction: row;
 }
