@@ -1,20 +1,25 @@
-import React, { useEffect } from "react";
+import React, { Component, createRef } from 'react';
 import { Container, Stack, Box, Typography } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import Button from "@mui/material/Button";
-import Rating from "@mui/material/Rating";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { FreeMode, Navigation, Thumbs } from "swiper";
-import { Link } from "react-router-dom";
 import CompareIcon from '@mui/icons-material/Compare';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 
 export default function ChosenProduct() {
+  const myDivRef = createRef<HTMLDivElement>();
+
+//HANDLERS
+  const handleClick = () => {
+    console.log("myDivRef:", myDivRef?.current?.style.display);
+    if(myDivRef.current){
+      myDivRef.current.style.display = 'block';
+    }
+  };
+
 
   return (
     <div className="chosen-product-section">
@@ -104,7 +109,7 @@ export default function ChosenProduct() {
                   <span className="details-name">Random access memory:</span> 4 GB
                 </Typography>
 
-                <a className="all-info" href="">All informations</a>
+                <a className="all-info" onClick={handleClick}>All informations</a>
               </Stack>
             </Box>
           </Stack>
@@ -130,6 +135,71 @@ export default function ChosenProduct() {
               </Button>
             </Stack>
           </Stack>
+        </Stack>
+        
+        {/* ALL-INFO */}
+        <Stack className="all-info-frame" ref={myDivRef}>
+          <Typography className="title">
+            All informations
+          </Typography>
+          
+          {/* INFOBOX */}
+          <Box className="info-box">
+            <Typography className="info-title">Main characteristics</Typography>
+            <div className="infos">
+              <div className="info-name">Memory</div>
+              <div className="pro-info">128 GB</div>
+            </div>
+
+            <div className="infos">
+              <div className="info-name">Color</div>
+              <div className="pro-info">Black</div>
+            </div>
+          </Box>
+
+          {/* INFOBOX */}
+          <Box className="info-box">
+            <Typography className="info-title">Processor</Typography>
+            <div className="infos">
+              <div className="info-name">Processor</div>
+              <div className="pro-info">A 14 Bionic</div>
+            </div>
+          </Box>
+
+          {/* INFOBOX */}
+          <Box className="info-box">
+            <Typography className="info-title">Display</Typography>
+            <div className="infos">
+              <div className="info-name">Diagonal</div>
+              <div className="pro-info">6,1"</div>
+            </div>
+            <div className="infos">
+              <div className="info-name">Display Tech.</div>
+              <div className="pro-info">True Tone</div>
+            </div>
+            <div className="infos">
+              <div className="info-name">Type of pixels</div>
+              <div className="pro-info">OLED</div>
+            </div>
+            <div className="infos">
+              <div className="info-name">460 pixel/dume</div>
+              <div className="pro-info">True Tone</div>
+            </div>
+            <div className="infos">
+              <div className="info-name">Contrast</div>
+              <div className="pro-info">2000000:1</div>
+            </div>
+          </Box>
+
+          {/* INFOBOX */}
+          <Box className="info-box">
+            <Typography className="info-title">Camera</Typography>
+            <div className="infos">
+              <div className="info-name">Pixels</div>
+              <div className="pro-info">12 MP</div>
+            </div>
+          </Box>
+
         </Stack>
 
       </Stack>

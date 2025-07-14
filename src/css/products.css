@@ -208,7 +208,7 @@
 .chosen-product-section .chosen-product-container .chosen-product-frame{
   width: 1170px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -279,10 +279,6 @@
 .chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .basic-images .basic-box .basic-img{
   max-width: 90%;
 }
-
-
-
-
 
 
 /* CHOSEN PRODUCT: CENTER DETAILS */
@@ -370,13 +366,9 @@
   font-size: 14px;
   font-weight: 500;
   color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
-
-
-
-
-
-
 
 /* CHOSEN PRODUCT: RIGHT PRICES */
 .chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .prices{
@@ -444,5 +436,64 @@
   color: black;
   margin-right: 10px;
   cursor: auto;
-  
+}
+
+/* ALL-INFO */
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame{
+  margin-top: 30px;
+  width: 100%;
+  padding: 40px 30px 40px 50px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-bottom: 30px;
+  display: none;
+  transition: ease-in-out;
+  transition-duration: 2000s;
+  transition-delay: 2000s;
+}
+
+.show-all-info-frame{
+  display: block;
+  transition: ease-in-out;
+  transition-duration: 2000s;
+  transition-delay: 2000s;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame 
+.info-box .info-title{
+  font-family: "TT Norms";
+  font-size: 18px;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame 
+.info-box{
+  margin-bottom: 40px;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame 
+.info-box .infos{
+  border-top: 1px solid #DADCDC;
+  height: 43px;
+  width: 70%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame 
+.info-box .infos:last-child{
+  border-bottom: 1px solid #DADCDC;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame 
+.info-box .infos .info-name{
+  width: 220px;
+  font-size: 14px;
+}
+
+.chosen-product-section .chosen-product-container .chosen-product-frame .all-info-frame 
+.info-box .infos .pro-info{
+  font-size: 14px;
 }
