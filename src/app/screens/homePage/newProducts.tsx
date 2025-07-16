@@ -16,6 +16,7 @@ import {
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { CssVarsProvider } from "@mui/joy/styles";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 import "../../../css/home.css"
 
@@ -43,6 +44,11 @@ export default function NewProducts(){
                         loading="lazy"
                         alt=""
                       />
+                      <img
+                        className="new-sign" 
+                        src="/icon/newsign.png" 
+                        alt="new Sign icon" 
+                      />
                   </CardOverflow>
                   <CardContent className="card-content">
                     <TypographyJoy level="body-xs" className="product-category">
@@ -65,19 +71,12 @@ export default function NewProducts(){
                       className="product-price"
                       level="title-lg"
                       sx={{ mt: 1, fontWeight: 'xl' }}
-                      endDecorator={
-                        <Chip component="span" size="sm" variant="soft" color="success" sx={{marginLeft: "10px"}}>
-                          Lowest price
-                        </Chip>
-                      }
+                      endDecorator={<FiberNewIcon/>}
                     >
                       700$
                     </TypographyJoy>
-                    <TypographyJoy className="product-left" level="body-sm">
-                      (Only <b>7</b> left in stock!)
-                    </TypographyJoy>
                   </CardContent>
-                  <ButtonJoy className="shopping-btn">
+                  <ButtonJoy className="shopping-btn" id="shopping-btn">
                       Add to cart
                     <ShoppingCartIcon sx={{marginLeft: "6px"}}></ShoppingCartIcon>
                   </ButtonJoy>

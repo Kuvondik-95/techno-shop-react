@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import "../../../css/navbar.css"
@@ -75,13 +75,16 @@ export default function HomeNavbar(){
 
         </Stack>
         
-        <Box className={"navbar-login"}>
-          <i className="fa-solid fa-right-to-bracket" style={{marginRight:"5px"}}></i>
-          <a href="">Login </a>
-          /
-          <a href=""> Signup</a>
-          
-        </Box>
+        <Stack className={"navbar-login"}>
+          <Button className="login-btn shining" variant="contained">
+            <i className="fa-solid fa-right-to-bracket" style={{marginRight:"5px"}}></i>
+            Login
+          </Button>
+          {/* <img 
+            src={"/img/default-user.png"} 
+            className={"navbar-user-avatar"}
+          /> */}
+        </Stack>
       </Container> 
     </div>
 }

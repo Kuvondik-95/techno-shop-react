@@ -14,9 +14,17 @@ export default function Advertisement(){
             <Typography className="title">Cashback for any purchase!</Typography>
             <ArrowCircleRightIcon className="arrow-icon"/>
           </Stack>
-          <Box className="adds-left-icons">
-
-          </Box>
+          <Stack className="adds-left-icons">
+            <div className="adds-polygon-1">
+              <h1>15%</h1>
+            </div>
+            <div className="adds-polygon-2">
+              <h1>10%</h1>
+            </div>
+            <div className="adds-polygon-3">
+              <h1>5%</h1>
+            </div>
+          </Stack>
         </Stack>
 
         <Stack className="adds-right">
@@ -28,9 +36,10 @@ export default function Advertisement(){
             <ArrowCircleRightIcon className="arrow-icon"/>
           </Stack>
           
-          <Box className="adds-right-icons">
-
-          </Box>
+          <Stack className="adds-right-icons">
+            <img className="delivery-icon" src="/icon/fastTruck.png" alt="Fast Truck Image" />
+            <div className="dlv-polygon-3"></div>
+          </Stack>
         </Stack>
 
       </Stack>

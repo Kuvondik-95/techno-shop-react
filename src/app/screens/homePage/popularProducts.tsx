@@ -73,9 +73,6 @@ export default function PopularProducts(){
                     >
                       500$
                     </TypographyJoy>
-                    <TypographyJoy className="product-left" level="body-sm">
-                      (Only <b>7</b> left in stock!)
-                    </TypographyJoy>
                   </CardContent>
                   <ButtonJoy className="shopping-btn">
                       Add to cart

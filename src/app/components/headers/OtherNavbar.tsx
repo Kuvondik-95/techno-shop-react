@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import "../../../css/otherNavbar.css"
@@ -7,7 +7,7 @@ import "../../../css/otherNavbar.css"
 export default function OtherNavbar(){
   return (
   <>
-      <div className="navbar-section">
+      <div className="other-navbar-section">
       <Container className="navbar-container">
         <Stack className="navbar-links">
         
@@ -77,13 +77,16 @@ export default function OtherNavbar(){
 
         </Stack>
         
-        <Box className={"navbar-login"}>
-          <i className="fa-solid fa-right-to-bracket" style={{marginRight:"5px"}}></i>
-          <a href="">Login </a>
-          /
-          <a href=""> Signup</a>
-          
-        </Box>
+        <Stack className={"navbar-login"}>
+          <Button className="login-btn shining" variant="contained">
+            <i className="fa-solid fa-right-to-bracket" style={{marginRight:"5px"}}></i>
+            Login
+          </Button>
+          {/* <img 
+            src={"/img/default-user.png"} 
+            className={"navbar-user-avatar"}
+          /> */}
+        </Stack>
       </Container> 
     </div>
 

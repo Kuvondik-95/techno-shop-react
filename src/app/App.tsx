@@ -9,6 +9,7 @@ import HelpPage from './screens/helpPage';
 import HomeNavbar from './components/headers/HomeNavbar';
 import OtherNavbar from './components/headers/OtherNavbar';
 import Footer from './components/footer';
+import "../css/index.css"
 
 
 function App() {

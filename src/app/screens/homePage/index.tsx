@@ -19,13 +19,16 @@ export default function HomePage(){
         
         <Stack className="header-frame-left">
           <Typography className="header-title">
-            Discount from T-Shop <br /> for Samsung smartphone
+            Discount From T-Shop <br /> For Samsung Smartphones
           </Typography>
-          <Button className="header-btn">More details</Button>
+          <Button className="header-btn shining">More details</Button>
         </Stack>
         
         <Box className="header-frame-right">
-          
+          <div className="polygon-1"></div>
+          <div className="polygon-2"></div>
+          <div className="polygon-3"></div>
+          <div className="polygon-4"></div>
           <img src={"/img/image1.png"} alt="this is Phone" className="header-image-1" />
           <img src={"/img/image2.png"} alt="this is Phone" className="header-image-2" />
           <img src={"/img/image3.png"} alt="this is Phone" className="header-image-3" />

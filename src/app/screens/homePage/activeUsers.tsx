@@ -26,7 +26,9 @@ export default function ActiveUsers(){
       <Stack className="users-frame">
         
         <Stack className="users-titles">
-          <Typography className="title" variant="h1">Active Users</Typography>
+          <Typography className="title" variant="h1">
+            Active Users 
+          </Typography>
           <Link className="view-all" href="#"></Link>
         </Stack>
 
@@ -37,19 +39,6 @@ export default function ActiveUsers(){
                 <Card className="card" sx={{ width: 320, maxWidth: '100%', boxShadow: 'xl' }}>
                   <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
                     <Avatar src="/static/images/avatar/1.jpg" sx={{ '--Avatar-size': '4rem' }} />
-                    <Chip
-                      size="sm"
-                      variant="soft"
-                      color="primary"
-                      sx={{
-                        mt: -1,
-                        mb: 1,
-                        border: '3px solid',
-                        borderColor: 'background.surface',
-                      }}
-                    >
-                      ACTIVE
-                    </Chip>
                     <TypographyJoy level="title-lg">Josephine Blanton</TypographyJoy>
                     <TypographyJoy level="body-sm" sx={{ maxWidth: '24ch' }}>
                       Hello, this is my bio and I am a PRO member of MUI. I am a developer and I
@@ -65,17 +54,9 @@ export default function ActiveUsers(){
                     >
                     </Box>
                   </CardContent>
-                  <CardOverflow sx={{ bgcolor: 'background.level1' }}>
-                    <CardActions buttonFlex="1">
-                      <ButtonGroup variant="outlined" sx={{ bgcolor: 'background.surface' }}>
-                        <ButtonJoy>Message</ButtonJoy>
-                      </ButtonGroup>
-                    </CardActions>
-                  </CardOverflow>
                 </Card>
               )
-            })}
-            
+            })}           
           </CssVarsProvider>
         </Stack>
       </Stack>
