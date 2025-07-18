@@ -40,11 +40,11 @@ export default function HomePage(){
 
   <PopularProducts/>
   <NewProducts/>
-  <Advertisement/>
   <News/>
+  <Advertisement/>
+  <ActiveUsers/>
   <Brands/>
   <Services/>
-  <ActiveUsers/>
   </>
 );
 

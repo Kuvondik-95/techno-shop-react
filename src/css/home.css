@@ -843,7 +843,50 @@
 }
 
 .users-section .users-container .users-frame .users-cards-frame .card{
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  width: 320px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #CDC9E1;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+}
+.users-section .users-container .users-frame .users-cards-frame .card .card-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.users-section .users-container .users-frame .users-cards-frame .card .card-img .user-img{
+  width: 70px;
+  height: 70px;
+}
+.users-section .users-container .users-frame .users-cards-frame .card .card-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.users-section .users-container .users-frame .users-cards-frame .card .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px 10px 10px;
+}
+
+.users-section .users-container .users-frame .users-cards-frame .card .card-content h4{
+  padding: 0;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.users-section .users-container .users-frame .users-cards-frame .card .card-content p{
+  padding: 0;
+  margin: 0;
+  margin-top: 4px;
+  font-size: 12px;
+  color: gray;
+}

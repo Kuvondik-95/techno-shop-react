@@ -33,31 +33,29 @@ export default function ActiveUsers(){
         </Stack>
 
         <Stack className="users-cards-frame">
-          <CssVarsProvider>
             {[1,2,3,4].map(ele => {
               return (
-                <Card className="card" sx={{ width: 320, maxWidth: '100%', boxShadow: 'xl' }}>
-                  <CardContent sx={{ alignItems: 'center', textAlign: 'center' }}>
-                    <Avatar src="/static/images/avatar/1.jpg" sx={{ '--Avatar-size': '4rem' }} />
-                    <TypographyJoy level="title-lg">Josephine Blanton</TypographyJoy>
-                    <TypographyJoy level="body-sm" sx={{ maxWidth: '24ch' }}>
-                      Hello, this is my bio and I am a PRO member of MUI. I am a developer and I
-                      love to code.
-                    </TypographyJoy>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        gap: 2,
-                        mt: 2,
-                        '& > button': { borderRadius: '2rem' },
-                      }}
-                    >
-                    </Box>
-                  </CardContent>
-                </Card>
+                <div className="card">
+                  <div className="card-img">
+                    <img 
+                      className="user-img"
+                      src="/img/default-user.png" 
+                      alt="" 
+                    />
+                  </div>
+                  <div className="card-body">
+                    <Rating defaultValue={5} readOnly></Rating>
+                  </div>
+                  <div className="card-content">
+                    <h4>Harry</h4>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum doloribus, sed molestiae nobis eos architecto voluptate. Pariatur commodi ab veritatis laborum
+                    </p>
+                  </div>
+                  
+                </div>
               )
             })}           
-          </CssVarsProvider>
         </Stack>
       </Stack>
     </Container>
