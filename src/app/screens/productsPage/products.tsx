@@ -28,6 +28,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { KeyboardArrowRight } from "@mui/icons-material";
 
 
 
@@ -43,7 +44,7 @@ export default function Products(){
           <Stack className="search-frame">
             {/* BRANDS */}
             <Stack className="brands-frame">
-              <button className="brand-btn">Apple</button>
+              <button className="brand-btn brand-chosen">Apple</button>
               <button className="brand-btn">Samsung</button>
               <button className="brand-btn">Huawei</button>
               <button className="brand-btn">LG</button>
@@ -98,11 +99,50 @@ export default function Products(){
           {/* CATEGORY, PRODUCTS */}
           <Stack className="category-products-frame">
             <Stack className="category-frame">
-              <button className="category-btn">SMARTPHONES</button>
+              <CssVarsProvider>
+                <ButtonJoy 
+                  className="category-btn"
+                  variant={"solid"} 
+                  endDecorator={<KeyboardArrowRight />} color="success"
+                >
+                  SMARTPHONES
+                </ButtonJoy>
+                <ButtonJoy 
+                  className="category-btn"
+                  variant={"outlined"} 
+                  endDecorator={<KeyboardArrowRight />} color="success"
+                >
+                  FOLDABLE
+                </ButtonJoy>
+                <ButtonJoy 
+                  className="category-btn"
+                  variant={"outlined"} 
+                  endDecorator={<KeyboardArrowRight />} color="success"
+                >
+                  BASIC
+                </ButtonJoy>
+                <ButtonJoy 
+                  className="category-btn"
+                  variant={"outlined"} 
+                  endDecorator={<KeyboardArrowRight />} color="success"
+                >
+                  RUGGED
+                </ButtonJoy>
+                <ButtonJoy 
+                  className="category-btn"
+                  variant={"outlined"} 
+                  endDecorator={<KeyboardArrowRight />} color="success"
+                >
+                  OTHER
+                </ButtonJoy>
+              </CssVarsProvider>
+              
+              
+              {/* <button className="category-btn">SMARTPHONES</button>
               <button className="category-btn">FOLDABLE</button>
               <button className="category-btn">BASIC</button>
               <button className="category-btn">RUGGED</button>
-              <button className="category-btn">OTHER</button>
+              <button className="category-btn">OTHER</button> */}
             </Stack>
             
             <Stack className="products-frame">

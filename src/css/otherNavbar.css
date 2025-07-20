@@ -16,7 +16,7 @@
 
 .other-navbar-section .navbar-container .navbar-links{
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   width: 800px;
   justify-content: space-between;
   align-items: center;
@@ -94,10 +94,10 @@
   width: 100%;
   margin-top: 51px;
   margin-bottom: 50px;
-  background-image: url("/public/img/banner/banner2.jpg");
+  background-image: url("/public/img/banner/bannerOther.png");
   height: 200px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: 0;
   
   display: flex;
