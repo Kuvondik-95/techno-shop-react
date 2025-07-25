@@ -94,10 +94,11 @@
   width: 100%;
   margin-top: 51px;
   margin-bottom: 50px;
-  background-image: url("/public/img/banner/bannerOther.png");
+  background-image: url("/public/img/banner/banner0.avif");
   height: 200px;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  /* background-size: cover; */
   background-position: 0;
   
   display: flex;
