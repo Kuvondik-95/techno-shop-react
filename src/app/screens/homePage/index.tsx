@@ -1,5 +1,5 @@
 import { Container, Stack, Box, Typography, Button } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import "../../../css/home.css"
 import PopularProducts from "./popularProducts";
 import NewProducts from "./newProducts";
@@ -11,6 +11,10 @@ import ActiveUsers from "./activeUsers";
 
 
 export default function HomePage(){
+  useEffect(() => {
+    
+  }, [])
+  
   return (
   <>
   <div className="header-section">
