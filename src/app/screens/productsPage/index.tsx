@@ -15,7 +15,7 @@ export default function ProductsPage(){
   return(
     <>
       <Routes>
-        <Route path={"/chosen"} element={<ChosenProduct/>} />
+        <Route path={"/dsfa"} element={<ChosenProduct/>} />
         <Route path={"/"} element={<Products/>} />
       </Routes>
     </>

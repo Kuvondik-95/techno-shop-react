@@ -4,23 +4,33 @@ import { CssVarsProvider } from "@mui/joy/styles";
 import Rating from '@mui/material/Rating';
 import "../../../css/home.css"
 import Card from '@mui/joy/Card';
-import { 
-  AspectRatio, 
-  CardContent, 
-  CardOverflow, 
-  Chip, 
-  Link as LinkJoy, 
-  Typography as TypographyJoy,
-  Button as ButtonJoy,
-  CircularProgress,
-  SvgIcon,
-  CardActions,
-  ButtonGroup
- } from "@mui/joy";
 import Avatar from '@mui/joy/Avatar';
+
+import { retrieveTopUsers } from "./selector";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { Product } from "../../../libs/types/product";
+import { serverApi } from "../../../libs/config";
+import { Member } from "../../../libs/types/member";
+
+/** REDUX SLICE & SELECTOR **/
+const topUsersRetriever = createSelector(
+  retrieveTopUsers,
+  (topUsers) => ({ topUsers })
+);
+
+const feedbacks = [
+  "The product quality is consistently outstanding, exceeding my expectations every time",
+  "I was completely impressed with their professionalism and customer service",
+  "Pricing is fair and transparent - definitely value for money. Their staff is not only friendly but also highly skilled",
+  "Efficiency and punctuality are hallmarks of their service. I recommend them to anyone tho is looking for some great phones!"
+]
 
 
 export default function ActiveUsers(){
+  const { topUsers } = useSelector(topUsersRetriever);
+  console.log("topUsers", topUsers);
+
   return <div className="users-section">
     <Container className="users-container">
       <Stack className="users-frame">
@@ -33,13 +43,14 @@ export default function ActiveUsers(){
         </Stack>
 
         <Stack className="users-cards-frame">
-            {[1,2,3,4].map(ele => {
+            {topUsers.length !== 0 ? (topUsers.map((member:Member, index) => {
+              const imagePath = `${serverApi}/${member.memberImage}`
               return (
-                <div className="card">
+                <div className="card" key={member._id}>
                   <div className="card-img">
                     <img 
                       className="user-img"
-                      src="/img/default-user.png" 
+                      src={imagePath} 
                       alt="" 
                     />
                   </div>
@@ -47,15 +58,17 @@ export default function ActiveUsers(){
                     <Rating defaultValue={5} readOnly></Rating>
                   </div>
                   <div className="card-content">
-                    <h4>Harry</h4>
+                    <h4>{member.memberNick}</h4>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum doloribus, sed molestiae nobis eos architecto voluptate. Pariatur commodi ab veritatis laborum
+                      “{feedbacks[index]}”
                     </p>
                   </div>
                   
                 </div>
+              )})): (
+                  <Box className="no-data">Users are not available!</Box>
               )
-            })}           
+            }           
         </Stack>
       </Stack>
     </Container>

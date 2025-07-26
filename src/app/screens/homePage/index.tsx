@@ -8,11 +8,68 @@ import News from "./news";
 import Brands from "./Brands";
 import Services from "./services";
 import ActiveUsers from "./activeUsers";
+import { setNewProducts, setPopularProducts, setTopUsers } from "./slice";
+import { Dispatch } from "@reduxjs/toolkit";
+import { Product } from "../../../libs/types/product";
+import { Member } from "../../../libs/types/member";
+import ProductService from "../../services/Product.service";
+import { ProductCollection } from "../../../libs/enums/product.enum";
+import { useDispatch } from "react-redux";
+import MemberService from "../../services/Member.service";
 
+const actionDispatch = (dispatch: Dispatch) => ({
+  setPopularProducts: (data: Product[]) => dispatch(setPopularProducts(data)),
+  setNewProducts: (data: Product[]) => dispatch(setNewProducts(data)),
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
+});
 
 export default function HomePage(){
+  const { setPopularProducts } = actionDispatch(useDispatch()); 
+  const { setNewProducts } = actionDispatch(useDispatch()); 
+  const { setTopUsers } = actionDispatch(useDispatch()); 
+
   useEffect(() => {
+    // Backend serverdan ma'lumotni olamiz
+    const productService = new ProductService;
+    const memberService = new MemberService
     
+    productService.getProducts({
+      page: 1, 
+      limit: 5, 
+      order: "productViews", 
+      productCollection: ProductCollection.SMARTPHONE
+    })
+    .then(data => {
+      console.log("PopularProducts: data passed here", data);
+      setPopularProducts(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+    productService.getProducts({
+      page: 1, 
+      limit: 5, 
+      order: "createdAt", 
+      productCollection: ProductCollection.SMARTPHONE
+    })
+    .then(data => {
+      console.log("NewProducts: data passed here", data);
+      setNewProducts(data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+    memberService.getTopUsers()
+    .then(data => {
+      console.log("NewDishes: data passed here", data);
+      setTopUsers(data);
+    }).catch(err => {
+      console.log(err)
+    })
+
+    // Redux store ga joylaymiz
   }, [])
   
   return (

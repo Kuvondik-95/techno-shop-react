@@ -14,6 +14,9 @@ export interface HomePageState{
 }
 
 /** PRODUCTS PAGE **/
-
+export interface ProductsPageState{
+  Products: Product[];
+  Product: Product;
+}
 
 /** ORDERS PAGE **/
