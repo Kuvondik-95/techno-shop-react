@@ -7,11 +7,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import { CssVarsProvider } from "@mui/joy/styles";
 import Products from "./products";
 import ChosenProduct from "./chosenProduct";
+import { CartItem } from "../../../libs/types/search";
 
 
+interface ProductsPageProps {
+  onAdd: (item: CartItem) => void;
+}
 
-
-export default function ProductsPage(){
+export default function ProductsPage(props: ProductsPageProps){
+  const { onAdd } = props;
   const location = useLocation();
   console.log("++",location.pathname);
 
@@ -20,7 +24,7 @@ export default function ProductsPage(){
     <>
       <Routes>
         {/* <Route path={`/`} element={<ChosenProduct/>} /> */}
-        <Route path={`/`} element={<Products/>}/>
+        <Route path={`/`} element={<Products onAdd={onAdd}/>}/>
       </Routes>
     </>
   )

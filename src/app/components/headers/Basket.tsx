@@ -51,7 +51,7 @@ export default function Basket(props: BasketProps) {
       // const order = new OrderService();
       // await order.createOrder(cartItems);
       
-      // onDeleteAll();
+      onDeleteAll();
 
       history("/orders");
 
@@ -73,8 +73,7 @@ export default function Basket(props: BasketProps) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <Badge badgeContent={5} color="secondary">
-          {/* <img style={{color:"black"}} src={"/icon/shopping-cart.svg"} /> */}
+        <Badge badgeContent={cartItems.length} color="secondary">
           <ShoppingCartIcon color="primary"/>
         </Badge>
       </IconButton>

@@ -41,6 +41,7 @@ import { ProductBrand, ProductCollection } from "../../../libs/enums/product.enu
 import { useNavigate } from "react-router-dom";
 import ProductService from "../../services/Product.service";
 import { serverApi } from "../../../libs/config";
+import { CartItem } from "../../../libs/types/search";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -52,9 +53,13 @@ const productsRetriever = createSelector(
   (products) => ({ products })
 );
 
+interface ProductsProps {
+  onAdd: (item: CartItem) => void;
+}
 
-export default function Products(){
-  
+
+export default function Products(props: ProductsProps){
+  const { onAdd } = props;
   const { setProducts } = actionDispatch(useDispatch());
   const { products } = useSelector(productsRetriever);
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
@@ -64,8 +69,6 @@ export default function Products(){
     productCollection: ProductCollection.SMARTPHONE,
     search: ""
   });
-
-  console.log("products", products);
 
   const [searchText, setSearchText] = useState<string>("");
   const history = useNavigate()
@@ -302,7 +305,7 @@ export default function Products(){
                   return(
                     <Card 
                     key={product._id}
-                    onClick={() => chooseDishHandler(product._id)}
+                    // onClick={() => chooseDishHandler(product._id)}
                     sx={{ width: "215px", height: "370px", boxShadow: 'lg' }} className="card"
                     >
                       <CardOverflow className="card-img-frame">
@@ -321,10 +324,9 @@ export default function Products(){
                         
                         <LinkJoy
                           className="product-name"
-                          href="#product-card"
                           color="neutral"
                           textColor="text.primary"
-                          overlay
+                          // overlay
                           // endDecorator={<ArrowOutwardIcon />}
                           sx={{ fontWeight: 'md' }}
                         >
@@ -346,7 +348,19 @@ export default function Products(){
                         }
                         
                       </CardContent>
-                      <ButtonJoy className="shopping-btn">
+                      <ButtonJoy 
+                        className="shopping-btn"
+                        onClick={(e) => {
+                          onAdd({
+                            _id: product._id,
+                            quantity: 1,
+                            name: product.productName,
+                            price: product.productPrice,
+                            image: product.productImages[0]
+                          })
+                          e.stopPropagation();
+                        }} 
+                      >
                           Add to cart
                         <ShoppingCartIcon sx={{marginLeft: "6px"}}></ShoppingCartIcon>
                       </ButtonJoy>
