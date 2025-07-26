@@ -145,10 +145,18 @@
   justify-content: center;
   align-items: center;
   padding-top: 12px;
+  height: 166px;
+}
+
+.products-section .products-container .products-main-frame .category-products-frame 
+.products-frame .card .card-img-frame .card-img{
+  mix-blend-mode: multiply;
 }
 
 .products-section .products-container .products-main-frame .category-products-frame 
 .products-frame .card .card-content{
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0;
 }
 
@@ -157,6 +165,7 @@
   color: #DADCDC;
   font-size: 12px;
   font-weight: 500;
+  margin: 0;
 }
 
 .products-section .products-container .products-main-frame .category-products-frame 
@@ -170,19 +179,22 @@
   font-size: 18px;
   font-weight: 700;
   color: #00C65E;
-  margin-top: 10px;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 .products-section .products-container .products-main-frame .category-products-frame 
 .products-frame .card .card-content .product-left{
-  color: #bdbdbd;
+  color: red;
   margin-top: 3px;
+
 }
 
 .products-section .products-container .products-main-frame .category-products-frame 
 .products-frame .card .shopping-btn{
   margin-top: 0 !important;
   padding-top: 0 !important;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   height: 30px;
   background-color: #2196f3;
   color: white;
@@ -233,6 +245,12 @@
   font-weight: 700;
   margin-bottom: 30px;
 }
+.chosen-product-section .chosen-product-container .chosen-product-frame .title .collection-title{
+  text-decoration: none;
+  text-transform: capitalize !important;
+  color: gray;
+  font-size: 16px;
+}
 
 .chosen-product-section .chosen-product-container .chosen-product-frame .details-frame{
   display: flex;
@@ -249,7 +267,7 @@
 }
 .chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .main-img-box {
   width: 370px;
-  height: 460px;
+  height: 460px !important;
   box-sizing: border-box;
   padding: 15px 26px;
   display: flex;
@@ -262,7 +280,9 @@
 .chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .main-img-box .main-img{
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   mix-blend-mode: multiply;
+  object-fit: cover;
   /* mix-blend-mode:darken;  yuqoridagiga o'xshash backgroundni remove qiladi*/ 
 }
 
@@ -287,7 +307,7 @@
 }
 
 .chosen-product-section .chosen-product-container .chosen-product-frame .details-frame .images .basic-images .basic-box .basic-img{
-  max-width: 90%;
+  max-width: 85%;
 }
 
 

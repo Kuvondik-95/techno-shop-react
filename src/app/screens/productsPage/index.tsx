@@ -1,6 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React from "react";
-import { Routes, Route, useLocation, useMatch } from 'react-router-dom'
+import { Routes, Route, RouteMatch, useMatch, useLocation } from 'react-router-dom'
 import "../../../css/products.css";
 import { Input, Button as ButtonJoy } from "@mui/joy";
 import SearchIcon from '@mui/icons-material/Search';
@@ -12,11 +12,15 @@ import ChosenProduct from "./chosenProduct";
 
 
 export default function ProductsPage(){
+  const location = useLocation();
+  console.log("++",location.pathname);
+
+
   return(
     <>
       <Routes>
-        <Route path={"/dsfa"} element={<ChosenProduct/>} />
-        <Route path={"/"} element={<Products/>} />
+        {/* <Route path={`/`} element={<ChosenProduct/>} /> */}
+        <Route path={`/`} element={<Products/>}/>
       </Routes>
     </>
   )

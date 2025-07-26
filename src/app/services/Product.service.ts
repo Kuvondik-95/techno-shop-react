@@ -13,11 +13,12 @@ class ProductService{
       let url = `${this.path}/product/all?order=${input.order}&page=${input.page}&limit=${input.limit}`;
       if(input.productCollection) 
         url += `&productCollection=${input.productCollection}`;
+      if(input.productBrand) 
+        url += `&productBrand=${input.productBrand}`;
       if(input.search) url += `&search=${input.search}`;
 
       const result = await axios.get(url);
-      // console.log("getProducts:", result);
-
+      console.log("getProducts:", result);
       return result.data;
     }catch(err){
       console.log("Error, getProducts:", err)

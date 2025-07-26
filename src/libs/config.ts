@@ -1,5 +1,5 @@
 export const serverApi: string = `${process.env.REACT_APP_API_URL}`
-console.log("+++ Server address:", process.env.REACT_APP_API_URL)
+
 export const Messages = {
   error1: "Something went wrong!",
   error2: "Please login first!",

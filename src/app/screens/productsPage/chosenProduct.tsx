@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, useEffect, useState } from 'react';
 import { Container, Stack, Box, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import "swiper/css";
@@ -8,18 +8,88 @@ import "swiper/css/thumbs";
 import CompareIcon from '@mui/icons-material/Compare';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
+/* REDUX imports */
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from '@reduxjs/toolkit';
+import { setChosenProduct, setOwner } from './slice';
+import { Product } from '../../../libs/types/product';
+import { createSelector } from "reselect";
+import { retrieveChosenProduct, retrieveOwner } from './selector';
+import { Member } from '../../../libs/types/member';
+import ProductService from '../../services/Product.service';
+import MemberService from '../../services/Member.service';
+import { serverApi } from '../../../libs/config';
+
+/** REDUX SLICE & SELECTOR **/
+const actionDispatch = (dispatch: Dispatch) => ({
+  setOwner: (data: Member) => dispatch(setOwner(data)),
+  setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
+});
+
+const ownerRetriever = createSelector(
+  retrieveOwner,
+  (owner) => ({owner})
+);
+const chosenProductRetriever = createSelector(
+  retrieveChosenProduct,
+  (chosenProduct) => ({chosenProduct})
+);
+
+
 
 export default function ChosenProduct() {
   const myDivRef = createRef<HTMLDivElement>();
+  const productId = "6884bb10941e800ae0e932a5";
+  const [InfoBox, setInfoBox] = useState<string>("close");
+  const {setOwner, setChosenProduct } = actionDispatch(useDispatch());
+  const {chosenProduct} = useSelector(chosenProductRetriever);
+  const {owner} = useSelector(ownerRetriever);
+  const [imagePath, setImagePath] = useState<string>(`${serverApi}/${chosenProduct?.productImages[1]}`);
+  console.log(imagePath);
 
-//HANDLERS
-  const handleClick = () => {
-    console.log("myDivRef:", myDivRef?.current?.style.display);
-    if(myDivRef.current){
-      myDivRef.current.style.display = 'block';
+
+  useEffect(() => {
+  const product = new ProductService();
+  product
+    .getProduct(productId)
+    .then(data => setChosenProduct(data))
+    .catch(err => console.log(err));
+
+  // const member = new MemberService()
+  // member
+  //   .getRestaurant()
+  //   .then(data => setOwner(data))
+  //   .catch(err => console.log(err)) 
+  }, []);
+
+  //HANDLERS
+  const handleDetailInfoBox = () => {
+    if(InfoBox === "close"){
+      if(myDivRef.current){
+        myDivRef.current.style.display = "block";
+        setInfoBox("open");
+      }
     }
+    if(InfoBox === "open"){
+      if(myDivRef.current){
+        myDivRef.current.style.display = "none";
+        setInfoBox("close");
+      }
+    } 
   };
 
+  function imagePathMaker(order:number){
+    return `${serverApi}/${chosenProduct?.productImages[order]}`
+  }
+
+  const imageHandler = (num: number) => {
+    const path = `${serverApi}/${chosenProduct?.productImages[num]}`
+    setImagePath(path);
+
+    return true;
+  }
+
+  console.log("chosenProduct:", chosenProduct);
 
   return (
     <div className="chosen-product-section">
@@ -29,7 +99,8 @@ export default function ChosenProduct() {
       </Typography>
       <Stack className="chosen-product-frame">
         <Typography className="title">
-          Smartphone Apple Iphone 11
+          {chosenProduct?.productName} 
+          <span className="collection-title"> &nbsp;({chosenProduct?.productCollection})</span>
         </Typography>
 
         <Stack className="details-frame">
@@ -40,33 +111,42 @@ export default function ChosenProduct() {
             <Box className="main-img-box">
               <img 
                 className="main-img" 
-                src="/img/phoneImg/main.png" 
+                src={imagePath}
                 alt="" 
               />
             </Box>
 
             {/* SECONDARY IMAGES */}  
             <Stack className="basic-images">
-              <Box className="basic-box">
+              <Box 
+                className="basic-box"
+                onClick={() => imageHandler(0)}
+              >
                 <img 
                   className="basic-img basic-img-1" 
-                  src="/img/phoneImg/basic1.png" 
+                  src={`${serverApi}/${chosenProduct?.productImages[0]}`}
                   alt="" 
                 />
               </Box>
               
-              <Box className="basic-box">
+              <Box 
+                className="basic-box"
+                onClick={() => imageHandler(1)}
+              >
                 <img 
                   className="basic-img basic-img-2" 
-                  src="/img/phoneImg/basic2.png" 
+                  src={`${serverApi}/${chosenProduct?.productImages[1]}`}
                   alt="" 
                 />
               </Box>
               
-              <Box className="basic-box">
+              <Box 
+                className="basic-box"
+                onClick={() => imageHandler(2)}
+              >
                 <img 
-                  className="basic-img basic-img-3" 
-                  src="/img/phoneImg/basic3.png" 
+                  className="basic-img basic-img-3"  
+                  src={`${serverApi}/${chosenProduct?.productImages[2]}`}
                   alt="" 
                 />
               </Box>
@@ -78,9 +158,7 @@ export default function ChosenProduct() {
             <Box className="memory-box">
               <Typography className="title">Memory capacity</Typography>
               <Stack className="memory-buttons">
-                <button className="memory-btn">64</button>
-                <button className="memory-btn">128</button>
-                <button className="memory-btn">256</button>
+                <button className="memory-btn">{chosenProduct?.productMemory}</button>
               </Stack>
             </Box>
 
@@ -98,18 +176,18 @@ export default function ChosenProduct() {
               <Typography className="title">Characteristics</Typography>
               <Stack className="details-stack">
                 <Typography className="details-info">
-                  <span className="details-name">Diagonal:</span> 5 dumes
+                  <span className="details-name">Diagonal:</span> {chosenProduct?.productScreenSize} inches
                 </Typography>
                 
                 <Typography className="details-info">
-                  <span className="details-name">Built-in memory:</span> 32 GB
+                  <span className="details-name">Built-in memory:</span> {chosenProduct?.productMemory} GB
                 </Typography>
                 
                 <Typography className="details-info">
-                  <span className="details-name">Random access memory:</span> 4 GB
+                  <span className="details-name">Random access memory:</span> {chosenProduct?.productRam} GB
                 </Typography>
 
-                <a className="all-info" onClick={handleClick}>All informations</a>
+                <a className="all-info" onClick={handleDetailInfoBox}>All informations</a>
               </Stack>
             </Box>
           </Stack>
@@ -148,12 +226,12 @@ export default function ChosenProduct() {
             <Typography className="info-title">Main characteristics</Typography>
             <div className="infos">
               <div className="info-name">Memory</div>
-              <div className="pro-info">128 GB</div>
+              <div className="pro-info">{chosenProduct?.productMemory} GB</div>
             </div>
 
             <div className="infos">
               <div className="info-name">Color</div>
-              <div className="pro-info">Black</div>
+              <div className="pro-info">unknown</div>
             </div>
           </Box>
 
@@ -161,8 +239,8 @@ export default function ChosenProduct() {
           <Box className="info-box">
             <Typography className="info-title">Processor</Typography>
             <div className="infos">
-              <div className="info-name">Processor</div>
-              <div className="pro-info">A 14 Bionic</div>
+              <div className="info-name">CPU Speed</div>
+              <div className="pro-info">{chosenProduct?.productCpuSpeed} GHz</div>
             </div>
           </Box>
 
@@ -171,11 +249,11 @@ export default function ChosenProduct() {
             <Typography className="info-title">Display</Typography>
             <div className="infos">
               <div className="info-name">Diagonal</div>
-              <div className="pro-info">6,1"</div>
+              <div className="pro-info">{chosenProduct?.productScreenSize}"</div>
             </div>
             <div className="infos">
-              <div className="info-name">Display Tech.</div>
-              <div className="pro-info">True Tone</div>
+              <div className="info-name">Display Resolution</div>
+              <div className="pro-info">{chosenProduct?.productResolution}</div>
             </div>
             <div className="infos">
               <div className="info-name">Type of pixels</div>
@@ -196,7 +274,7 @@ export default function ChosenProduct() {
             <Typography className="info-title">Camera</Typography>
             <div className="infos">
               <div className="info-name">Pixels</div>
-              <div className="pro-info">12 MP</div>
+              <div className="pro-info">{chosenProduct?.productCamera} MP</div>
             </div>
           </Box>
 

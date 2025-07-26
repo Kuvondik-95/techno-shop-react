@@ -1,5 +1,5 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from 'react-router-dom'
 import "../../../css/products.css";
 import { Input, Button as ButtonJoy } from "@mui/joy";
@@ -30,9 +30,103 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { KeyboardArrowRight } from "@mui/icons-material";
 
+// REDUX
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from '@reduxjs/toolkit';
+import { setProducts } from './slice';
+import { Product, ProductInquiry } from '../../../libs/types/product';
+import { retrieveProducts } from './selector';
+import { createSelector } from "reselect";
+import { ProductBrand, ProductCollection } from "../../../libs/enums/product.enum";
+import { useNavigate } from "react-router-dom";
+import ProductService from "../../services/Product.service";
+import { serverApi } from "../../../libs/config";
+
+/** REDUX SLICE & SELECTOR **/
+const actionDispatch = (dispatch: Dispatch) => ({
+  setProducts: (data: Product[]) => dispatch(setProducts(data)),
+});
+
+const productsRetriever = createSelector(
+  retrieveProducts,
+  (products) => ({ products })
+);
 
 
 export default function Products(){
+  
+  const { setProducts } = actionDispatch(useDispatch());
+  const { products } = useSelector(productsRetriever);
+  const [productSearch, setProductSearch] = useState<ProductInquiry>({
+    page: 1, 
+    limit: 8, 
+    order: "createdAt", 
+    productCollection: ProductCollection.SMARTPHONE,
+    search: ""
+  });
+
+  console.log("products", products);
+
+  const [searchText, setSearchText] = useState<string>("");
+  const history = useNavigate()
+
+  useEffect(() => {
+    const product = new ProductService();
+    product
+    .getProducts(productSearch)
+    .then((data)=> {
+      setProducts(data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, [productSearch]);
+  
+  useEffect(() => {
+    if(searchText === ""){
+      productSearch.search = "";
+      setProductSearch({...productSearch});  
+    }
+  }, [searchText]);
+
+   /** HANDLERS **/
+
+  const searchCollectionHandler =(collection: ProductCollection) => {
+    productSearch.page = 1;
+    productSearch.productCollection = collection;
+    setProductSearch({...productSearch});
+  }
+  
+  const brandHandler = (brand: ProductBrand) => {
+    productSearch.page = 1;
+    if(brand === ProductBrand.ALL){
+      delete productSearch['productBrand'];
+    }else{
+      productSearch.productBrand = brand;
+    }
+    
+    setProductSearch({...productSearch});
+  }
+
+  const orderSearchHandler = (order: string) => {
+    productSearch.page = 1;
+    productSearch.order = order;
+    setProductSearch({...productSearch});
+  }
+  const searchProductHandler = () => {
+    console.log(searchText);
+    productSearch.search = searchText;
+    setProductSearch({...productSearch});
+  }
+
+  const paginationHandler = (e: ChangeEvent<any>, value: number) => {
+    productSearch.page = value;
+    setProductSearch({...productSearch});
+  }
+
+  const chooseDishHandler = (id: string) => {
+    history(`/products/${id}`);
+  }
 
   return  (
     <div className="products-section">
@@ -44,10 +138,39 @@ export default function Products(){
           <Stack className="search-frame">
             {/* BRANDS */}
             <Stack className="brands-frame">
-              <button className="brand-btn brand-chosen">Apple</button>
-              <button className="brand-btn">Samsung</button>
-              <button className="brand-btn">Huawei</button>
-              <button className="brand-btn">LG</button>
+              <button 
+                className={`brand-btn ${productSearch.productBrand === "APPLE" ? "brand-chosen" : ""}`}
+                onClick={() => brandHandler(ProductBrand.APPLE)}
+              >
+                Apple
+              </button>
+              
+              <button 
+                className={`brand-btn ${productSearch.productBrand === "SAMSUNG" ? "brand-chosen" : ""}`}
+                onClick={() => brandHandler(ProductBrand.SAMSUNG)}
+              >
+                Samsung
+              </button>
+              
+              <button 
+                className={`brand-btn ${productSearch.productBrand === "HUAWEI" ? "brand-chosen" : ""}`} 
+                onClick={() => brandHandler(ProductBrand.HUAWEI)}
+              >
+                Huawei
+              </button>
+              <button 
+                className={`brand-btn ${productSearch.productBrand === "LG" ? "brand-chosen" : ""}`}
+                onClick={() => brandHandler(ProductBrand.LG)}
+              >
+                LG
+              </button>
+
+              <button 
+                className={`brand-btn ${!productSearch.productBrand ? "brand-chosen" : ""}`}
+                onClick={() => brandHandler(ProductBrand.ALL)}
+              >
+                ALL
+              </button>
             </Stack>
             {/* SEARCH, ORDER */}
             <Stack className="search-order">
@@ -57,11 +180,16 @@ export default function Products(){
                 variant="outlined"
                 placeholder="Type here"
                 sx={{"--Input-focusedThickness": "0px"}}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => {
+                  if(e.key === "Enter") searchProductHandler();
+                }}
                 endDecorator={
                   <ButtonJoy 
-                  className="search-btn" 
-                  endDecorator={<SearchIcon />} 
-                  sx={{ mr: -1.5}}
+                    className="search-btn" 
+                    endDecorator={<SearchIcon />} 
+                    sx={{ mr: -1.5}}
+                    onClick={searchProductHandler}
                   >
                     SEARCH
                   </ButtonJoy>
@@ -73,7 +201,7 @@ export default function Products(){
                 <CssVarsProvider>
                   <Select
                     className="order-select"
-                    placeholder="Order"
+                    defaultValue={"new"}
                     indicator={<KeyboardArrowDown />}
                     sx={{
                       width: 240,
@@ -85,9 +213,26 @@ export default function Products(){
                       },
                     }}
                   >
-                    <Option value="new">New</Option>
-                    <Option value="price">Price</Option>
-                    <Option value="views">Views</Option>
+                    <Option 
+                      value="new" 
+                      onClick={() => {orderSearchHandler("createdAt")}}
+                    >
+                      New
+                    </Option>
+                    
+                    <Option 
+                      value="price"
+                      onClick={() => {orderSearchHandler("productPrice")}}
+                    >
+                      Price
+                    </Option>
+                    
+                    <Option 
+                      value="views"
+                      onClick={() => {orderSearchHandler("productViews")}}
+                    >
+                      Views
+                    </Option>
                   </Select>
                 </CssVarsProvider>
               </Box>
@@ -102,36 +247,41 @@ export default function Products(){
               <CssVarsProvider>
                 <ButtonJoy 
                   className="category-btn"
-                  variant={"solid"} 
+                  variant={productSearch?.productCollection === ProductCollection.SMARTPHONE ? "solid" : "outlined"} 
                   endDecorator={<KeyboardArrowRight />} color="success"
+                  onClick={() => searchCollectionHandler(ProductCollection.SMARTPHONE)}
                 >
                   SMARTPHONES
                 </ButtonJoy>
                 <ButtonJoy 
                   className="category-btn"
-                  variant={"outlined"} 
+                  variant={productSearch?.productCollection === ProductCollection.FOLDABLE ? "solid" : "outlined"} 
                   endDecorator={<KeyboardArrowRight />} color="success"
+                  onClick={() => searchCollectionHandler(ProductCollection.FOLDABLE)}
                 >
                   FOLDABLE
                 </ButtonJoy>
                 <ButtonJoy 
                   className="category-btn"
-                  variant={"outlined"} 
+                  variant={productSearch?.productCollection === ProductCollection.BASIC ? "solid" : "outlined"}
                   endDecorator={<KeyboardArrowRight />} color="success"
+                  onClick={() => searchCollectionHandler(ProductCollection.BASIC)}
                 >
                   BASIC
                 </ButtonJoy>
                 <ButtonJoy 
                   className="category-btn"
-                  variant={"outlined"} 
+                  variant={productSearch?.productCollection === ProductCollection.RUGGED ? "solid" : "outlined"}
                   endDecorator={<KeyboardArrowRight />} color="success"
+                  onClick={() => searchCollectionHandler(ProductCollection.RUGGED)}
                 >
                   RUGGED
                 </ButtonJoy>
                 <ButtonJoy 
                   className="category-btn"
-                  variant={"outlined"} 
+                  variant={productSearch?.productCollection === ProductCollection.OTHER ? "solid" : "outlined"}
                   endDecorator={<KeyboardArrowRight />} color="success"
+                  onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
                 >
                   OTHER
                 </ButtonJoy>
@@ -147,24 +297,26 @@ export default function Products(){
             
             <Stack className="products-frame">
               <CssVarsProvider>
-                {[1,2,3,4,5,6,7,8].map((ele, index) => {
+                {products.length !== 0 ? (products.map((product: Product, index) => {
+                  const imagePath = `${serverApi}/${product.productImages[0]}`
                   return(
                     <Card 
-                    key={index}
+                    key={product._id}
+                    onClick={() => chooseDishHandler(product._id)}
                     sx={{ width: "215px", height: "370px", boxShadow: 'lg' }} className="card"
                     >
                       <CardOverflow className="card-img-frame">
                           <img
                             className="card-img"
-                            style={{ width: "121px", height: "166px" }}
-                            src="/img/newPhone.png"
+                            style={{ width: "100%", height: "100%" }}
+                            src={imagePath}
                             loading="lazy"
                             alt=""
                           />
                       </CardOverflow>
                       <CardContent className="card-content">
                         <TypographyJoy level="body-xs" className="product-category">
-                          SMARTPHONE
+                          {product.productCollection}
                         </TypographyJoy>
                         
                         <LinkJoy
@@ -176,7 +328,7 @@ export default function Products(){
                           // endDecorator={<ArrowOutwardIcon />}
                           sx={{ fontWeight: 'md' }}
                         >
-                          Samsung Galaxy S24
+                          {product.productName}
                         </LinkJoy>
 
                         <TypographyJoy
@@ -184,19 +336,25 @@ export default function Products(){
                           level="title-lg"
                           sx={{ mt: 1, fontWeight: 'xl' }}
                         >
-                          700$
+                          {product.productPrice}$
                         </TypographyJoy>
-                        <TypographyJoy className="product-left" level="body-sm">
-                          (Only <b>7</b> left in stock!)
-                        </TypographyJoy>
+                        {product.productLeftCount < 10 
+                        ? (<TypographyJoy className="product-left" level="body-sm">
+                            (Only <b>{product.productLeftCount}</b> left in stock!)
+                          </TypographyJoy>) 
+                        : (<></>)
+                        }
+                        
                       </CardContent>
                       <ButtonJoy className="shopping-btn">
                           Add to cart
                         <ShoppingCartIcon sx={{marginLeft: "6px"}}></ShoppingCartIcon>
                       </ButtonJoy>
                     </Card>
+                  )})): (
+                    <Box className="no-data">Products are not available!</Box>
                   )
-                })}
+                }
               </CssVarsProvider>
             </Stack>
           </Stack>

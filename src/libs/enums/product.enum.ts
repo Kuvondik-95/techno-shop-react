@@ -20,7 +20,8 @@ export enum ProductBrand {
   MOTOROLA = "MOTOROLA",
   VIVO = "VIVO",
   LG = "LG",
-  OTHER = "OTHER"
+  OTHER = "OTHER",
+  ALL = "ALL"
 }
 
 export enum ProductStatus {

@@ -101,7 +101,7 @@ export default function PopularProducts(){
                   )}
                 )
               ):(
-                  <Box className="no-data">New products are not available!</Box>
+                  <Box className="no-data">Products are not available!</Box>
                 )
             }
           </CssVarsProvider>

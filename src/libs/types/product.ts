@@ -28,6 +28,7 @@ export interface ProductInquiry{
   page: number;
   limit: number;
   productCollection?: ProductCollection;
+  productBrand?: ProductBrand;
   search?: string;
 }
 
