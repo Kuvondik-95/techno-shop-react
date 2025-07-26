@@ -3,8 +3,33 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import "../../../css/navbar.css"
+import Basket from "./Basket";
+import { CartItem } from "../../../libs/types/search";
 
-export default function HomeNavbar(){
+interface HomeNavbarProps{
+    cartItems: CartItem[];
+    onAdd: (item: CartItem) => void;
+    onRemove: (item: CartItem) => void;
+    onDelete: (item: CartItem) => void;
+    onDeleteAll: () => void;
+    // setSignupOpen: (isOpen: boolean) => void;
+    // setLoginOpen: (isOpen: boolean) => void;
+    // handleLogoutClick: (e: React.MouseEvent<HTMLElement>) => void;
+    // anchorEl: HTMLElement | null;
+    // handleCloseLogout: () => void;
+    // handleLogOutRequest: () => void;
+}
+
+export default function HomeNavbar(props: HomeNavbarProps){
+  const { 
+    cartItems, 
+    onAdd, 
+    onRemove, 
+    onDelete, 
+    onDeleteAll
+} = props;
+
+
   return <div className="navbar-section">
       <Container className="navbar-container">
         <Stack className="navbar-links">
@@ -76,6 +101,13 @@ export default function HomeNavbar(){
         </Stack>
         
         <Stack className={"navbar-login"}>
+          <Basket 
+            cartItems={cartItems}
+            onAdd={onAdd}
+            onRemove={onRemove}
+            onDelete={onDelete} 
+            onDeleteAll={onDeleteAll} 
+          />
           <Button className="login-btn shining" variant="contained">
             <i className="fa-solid fa-right-to-bracket" style={{marginRight:"5px"}}></i>
             Login

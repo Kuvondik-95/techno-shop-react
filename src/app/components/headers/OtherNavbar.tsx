@@ -3,8 +3,33 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import "../../../css/otherNavbar.css"
+import { CartItem } from "../../../libs/types/search";
+import Basket from "./Basket";
 
-export default function OtherNavbar(){
+interface OtherNavbarProps{
+    cartItems: CartItem[];
+    onAdd: (item: CartItem) => void;
+    onRemove: (item: CartItem) => void;
+    onDelete: (item: CartItem) => void;
+    onDeleteAll: () => void;
+    // setSignupOpen: (isOpen: boolean) => void;
+    // setLoginOpen: (isOpen: boolean) => void;
+    // handleLogoutClick: (e: React.MouseEvent<HTMLElement>) => void;
+    // anchorEl: HTMLElement | null;
+    // handleCloseLogout: () => void;
+    // handleLogOutRequest: () => void;
+}
+
+
+export default function OtherNavbar(props: OtherNavbarProps){
+  const { 
+        cartItems, 
+        onAdd, 
+        onRemove, 
+        onDelete, 
+        onDeleteAll
+    
+    } = props;
   return (
   <>
       <div className="other-navbar-section">
@@ -78,6 +103,13 @@ export default function OtherNavbar(){
         </Stack>
         
         <Stack className={"navbar-login"}>
+          <Basket 
+            cartItems={cartItems}
+            onAdd={onAdd}
+            onRemove={onRemove}
+            onDelete={onDelete} 
+            onDeleteAll={onDeleteAll} 
+          />
           <Button className="login-btn shining" variant="contained">
             <i className="fa-solid fa-right-to-bracket" style={{marginRight:"5px"}}></i>
             Login
