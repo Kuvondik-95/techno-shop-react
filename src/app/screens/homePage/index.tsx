@@ -16,6 +16,8 @@ import ProductService from "../../services/Product.service";
 import { ProductCollection } from "../../../libs/enums/product.enum";
 import { useDispatch } from "react-redux";
 import MemberService from "../../services/Member.service";
+import { useGlobals } from "../../hooks/useGlobals";
+import { Link } from "react-router-dom";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularProducts: (data: Product[]) => dispatch(setPopularProducts(data)),
@@ -23,10 +25,16 @@ const actionDispatch = (dispatch: Dispatch) => ({
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
 
-export default function HomePage(){
+interface homePageProps{
+  setSignupOpen: (isOpen: boolean) => void;
+}
+
+export default function HomePage(props: homePageProps){
+  const { setSignupOpen } = props;
   const { setPopularProducts } = actionDispatch(useDispatch()); 
   const { setNewProducts } = actionDispatch(useDispatch()); 
-  const { setTopUsers } = actionDispatch(useDispatch()); 
+  const { setTopUsers } = actionDispatch(useDispatch());
+  const { authMember } = useGlobals();
 
   useEffect(() => {
     // Backend serverdan ma'lumotni olamiz
@@ -82,7 +90,24 @@ export default function HomePage(){
           <Typography className="header-title">
             Discount From T-Shop <br /> For Samsung Smartphones
           </Typography>
-          <Button className="header-btn shining">More details</Button>
+          {!authMember 
+          ? (
+            <Button 
+              className="header-btn shining"
+              onClick={() => setSignupOpen(true)}
+            >
+              Sign Up
+            </Button>
+          ) 
+          : (
+            <Link 
+              to={"/products"}
+              className="link-to-products"
+            >
+              See All Products
+            </Link>
+          )}
+          
         </Stack>
         
         <Box className="header-frame-right">

@@ -40,7 +40,7 @@ export default function NewProducts(){
         
         <Stack className="new-titles">
           <Typography className="title" variant="h1">New Products</Typography>
-          <Link className="view-all" href="#">View all</Link>
+          <Link className="view-all" href="/products">View all</Link>
         </Stack>
 
         <Stack className="new-cards-frame">

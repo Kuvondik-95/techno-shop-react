@@ -40,7 +40,7 @@ export default function PopularProducts(){
         
         <Stack className="popular-titles">
           <Typography className="title" variant="h1">Popular Products</Typography>
-          <Link className="view-all" href="#">View all</Link>
+          <Link className="view-all" href="/products">View all</Link>
         </Stack>
 
         <Stack className="popular-cards-frame">

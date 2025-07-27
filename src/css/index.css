@@ -80,3 +80,17 @@ code {
   line-height: 34px;
   color: #FFB762;
 }
+
+/* .auth-inputs::placeholder{
+  color: blue !important;
+}
+.MuiInputBase-input::placeholder{
+  color: blue !important;
+}
+.MuiOutlinedInput-input{
+  color: blue !important;
+} 
+
+.css-16wblaj-MuiInputBase-input-MuiOutlinedInput-input{
+  color: blue !important;
+} */
