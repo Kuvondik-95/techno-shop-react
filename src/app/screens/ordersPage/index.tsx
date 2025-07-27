@@ -9,14 +9,62 @@ import { FinishedOrders } from "./FinishedOrders";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PersonIcon from '@mui/icons-material/Person';
 import "../../../css/orders.css"
+import { Order, OrderInquiry } from '../../../libs/types/order';
+import { setPausedOrders, setProcessOrders, setFinishedOrders } from './slice';
+import { useDispatch } from "react-redux";
+import OrderService from "../../services/Order.Service";
+import { OrderStatus } from "../../../libs/enums/order.enum";
+import { useGlobals } from "../../hooks/useGlobals";
+import { useNavigate } from 'react-router-dom';
+import { serverApi } from '../../../libs/config';
+import { MemberType } from '../../../libs/enums/member.enum';
 
+
+/** REDUX SLICE & SELECTOR **/
+const actionDispatch = (dispatch: Dispatch) => ({
+  setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
+  setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
+  setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
+});
 
 export default function OrdersPage() {
+  const {
+    setPausedOrders, 
+    setProcessOrders, 
+    setFinishedOrders
+  } = actionDispatch(useDispatch());
+  const { orderBuilder, authMember } = useGlobals();
+  const history = useNavigate();
   const [value, setValue] = useState("1");
+  const [orderInquriy, setOrderInquiry] = useState<OrderInquiry>({
+    page: 1,
+    limit: 5,
+    orderStatus: OrderStatus.PAUSE
+  });
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+   useEffect(()  => {
+    //ComponentDidMount
+    const order = new OrderService();
+
+    order.getMyOrders({...orderInquriy, orderStatus: OrderStatus.PAUSE})
+    .then((data) => setPausedOrders(data))
+    .catch((err) => console.log(err));
+    
+    order.getMyOrders({...orderInquriy, orderStatus: OrderStatus.PROCESS})
+    .then((data) => setProcessOrders(data))
+    .catch((err) => console.log(err));
+
+    order.getMyOrders({...orderInquriy, orderStatus: OrderStatus.FINISH})
+    .then((data) => setFinishedOrders(data))
+    .catch((err) => console.log(err));
+
+  }, [orderInquriy, orderBuilder]);
+
+
   return (
       <div className={"order-page"}>
         <Container className={"order-container"}>  
@@ -52,24 +100,32 @@ export default function OrdersPage() {
                 <div className={"order-user-img"}>
                   
                   <img 
-                    src={"/img/default-user.png"} 
+                    src={authMember?.memberImage 
+                          ? `${serverApi}/${authMember?.memberImage} `
+                          : "/icon/default-user.svg"
+                          } 
                     className={"order-user-avatar"}
                   />
                   
                   <div className={"order-user-icon-box"}>
-                    <img src={"/icon/avatar.svg"} 
+                    <img src={
+                          authMember?.memberType === MemberType.OWNER 
+                            ? "/icon/ownerBadge.svg"
+                            : "/icon/avatar.svg" }  
                     />
                   </div>
                 </div>
-                <span className={"order-user-name"}>Khalid</span>
-                <span className={"order-user-prof"}>Admin</span>
+                <span className={"order-user-name"}>{authMember?.memberNick}</span>
+                <span className={"order-user-prof"}>{authMember?.memberType}</span>
               </Box>
               <Box className={"liner"}></Box>
               <Box className={"order-user-address"}>
                 <div style={{display: "flex"}}>
                   <LocationOnIcon sx={{width:"24px", height:"24px"}}/>
                   <Typography className={"order-user-address-text"}>
-                    no address
+                    {authMember?.memberAddress 
+                      ? authMember.memberAddress 
+                      : "no address information"}
                   </Typography>
                 </div>
               </Box>

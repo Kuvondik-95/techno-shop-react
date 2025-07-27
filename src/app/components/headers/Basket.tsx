@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { CartItem } from "../../../libs/types/search";
 import { Messages, serverApi } from "../../../libs/config";
 import { sweetErrorHandling } from "../../../libs/sweetAlert";
+import OrderService from "../../services/Order.Service";
+import { useGlobals } from "../../hooks/useGlobals";
 // import { useGlobals } from "../../hooks/useGlobals";
 // import OrderService from "../../services/Order.Service";
 
@@ -23,7 +25,7 @@ interface BasketProps{
 
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-  // const { authMember, setOrderBuilder } = useGlobals();
+  const { authMember, setOrderBuilder } = useGlobals();
   const history = useNavigate();
   const itemsPrice: number = cartItems.reduce(
     (a:number, c:CartItem) => a + c.quantity * c.price, 
@@ -46,17 +48,17 @@ export default function Basket(props: BasketProps) {
   const proceedOrderHandler = async () => {
     try{
       handleClose();
-      // if(!authMember) throw new Error(Messages.error2);
+      if(!authMember) throw new Error(Messages.error2);
 
-      // const order = new OrderService();
-      // await order.createOrder(cartItems);
+      const order = new OrderService();
+      await order.createOrder(cartItems);
       
       onDeleteAll();
 
       history("/orders");
 
-      //REFRESH VIA CONTEXT
-      // setOrderBuilder(new Date());
+      // REFRESH VIA CONTEXT
+      setOrderBuilder(new Date());
     }catch(err){
       console.log(err);
       sweetErrorHandling(err).then();
