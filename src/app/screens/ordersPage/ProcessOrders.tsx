@@ -43,6 +43,7 @@ export function ProcessOrders( props: ProcessOrdersProps){
         orderStatus: OrderStatus.FINISH
       };
 
+      console.log("input:", input);
       const confirmation = window.confirm("Have you received your order?")
       if(confirmation){
         const order = new OrderService();
@@ -95,6 +96,7 @@ export function ProcessOrders( props: ProcessOrdersProps){
                         {moment().format("YY-MM-DD HH:mm")}
                       </Typography>
                       <Button 
+                        value={order._id}
                         className={"payment-btn"}
                         onClick={finishOrderHandler}
                         >
@@ -109,7 +111,7 @@ export function ProcessOrders( props: ProcessOrdersProps){
             {!processOrders || (processOrders.length === 0) && (
               <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
                 <img 
-                  src={"/icons/noimage-list.svg"} 
+                  src={"/icon/noimage-list.svg"} 
                   style={{ width: 300, height: 300 }} 
                 />
               </Box>

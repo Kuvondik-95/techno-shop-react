@@ -81,10 +81,11 @@ code {
   color: #FFB762;
 }
 
-/* .auth-inputs::placeholder{
+/* .auth-inputs::-webkit-input-placeholder{
   color: blue !important;
-}
-.MuiInputBase-input::placeholder{
+} 
+*/
+/* .MuiInputBase-input::placeholder{
   color: blue !important;
 }
 .MuiOutlinedInput-input{
