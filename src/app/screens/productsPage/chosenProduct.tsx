@@ -19,6 +19,8 @@ import { Member } from '../../../libs/types/member';
 import ProductService from '../../services/Product.service';
 import MemberService from '../../services/Member.service';
 import { serverApi } from '../../../libs/config';
+import { useParams } from 'react-router-dom';
+import { CartItem } from '../../../libs/types/search';
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -35,16 +37,21 @@ const chosenProductRetriever = createSelector(
   (chosenProduct) => ({chosenProduct})
 );
 
+interface ChosenProductProps {
+  onAdd: (item: CartItem) => void;
+}
 
 
-export default function ChosenProduct() {
+export default function ChosenProduct(props: ChosenProductProps) {
+  const { onAdd } = props;
   const myDivRef = createRef<HTMLDivElement>();
-  const productId = "6884bb10941e800ae0e932a5";
+  const { id } = useParams();
+  const productId = id as string;
   const [InfoBox, setInfoBox] = useState<string>("close");
   const {setOwner, setChosenProduct } = actionDispatch(useDispatch());
   const {chosenProduct} = useSelector(chosenProductRetriever);
   const {owner} = useSelector(ownerRetriever);
-  const [imagePath, setImagePath] = useState<string>(`${serverApi}/${chosenProduct?.productImages[1]}`);
+  const [imagePath, setImagePath] = useState<string>(``);
   console.log(imagePath);
 
 
@@ -52,8 +59,12 @@ export default function ChosenProduct() {
   const product = new ProductService();
   product
     .getProduct(productId)
-    .then(data => setChosenProduct(data))
+    .then(data => {
+      setChosenProduct(data);
+      setImagePath(`${serverApi}/${data?.productImages[0]}`);
+    })
     .catch(err => console.log(err));
+  
 
   // const member = new MemberService()
   // member
@@ -77,10 +88,6 @@ export default function ChosenProduct() {
       }
     } 
   };
-
-  function imagePathMaker(order:number){
-    return `${serverApi}/${chosenProduct?.productImages[order]}`
-  }
 
   const imageHandler = (num: number) => {
     const path = `${serverApi}/${chosenProduct?.productImages[num]}`
@@ -195,7 +202,7 @@ export default function ChosenProduct() {
           {/* RIGHT PRICES */}
           <Stack className="prices">
             <Box className="price-box">
-              Price: <span className="price">500</span>$
+              Price: <span className="price">{chosenProduct?.productPrice}</span>$
             </Box>
             
             <Box className="compare-box">
@@ -203,7 +210,23 @@ export default function ChosenProduct() {
             </Box>
 
             <Stack className="purchase-box">
-              <button className="buy-btn">Add to Card</button>
+              <button 
+                className="buy-btn"
+                onClick={(e) => {
+                  if(chosenProduct){
+                    onAdd({
+                    _id: chosenProduct?._id,
+                    quantity: 1,
+                    name: chosenProduct?.productName,
+                    price: chosenProduct?.productPrice,
+                    image: chosenProduct?.productImages[0]
+                  })
+                  }
+                  
+                }}
+              >
+                Add to Card
+              </button>
               <Button 
                 className="delivery-btn"
                 endIcon={<LocalShippingIcon/>}

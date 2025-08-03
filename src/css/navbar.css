@@ -113,10 +113,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: #d7b586;
+  background: #CCEFDB !important;
   border-width: 1px 0px;
   border-style: solid;
   border-color: #343434;
+}
+.basket-frame .all-check-box .cart-top-box{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .basket-frame .basket-info-box {
@@ -184,13 +191,13 @@
   border-top: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-.basket-order .price {
-  width: 200px;
+.basket-frame .basket-order .price {
+  width: 230px;
   display: flex;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 30px;
   color: #000000;
 }

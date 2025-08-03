@@ -130,8 +130,18 @@
 .products-frame .card{
   border: none;
   width: 240px;
-  
+  position: relative; 
 }
+
+.products-section .products-container .products-main-frame .category-products-frame 
+.products-frame .card .views-title{
+  position: absolute;
+  top: 180px;
+  right: 12px;
+  color: #DADCDC;
+  font-size: 13px;
+}
+
 
 .products-section .products-container .products-main-frame .category-products-frame 
 .products-frame .card:hover{

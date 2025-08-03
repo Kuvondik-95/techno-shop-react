@@ -80,11 +80,11 @@ function App() {
           />) }
 
       <Routes>
-        <Route path="/products" element={<ProductsPage onAdd={onAdd}/>} />
+        <Route path="/products/*" element={<ProductsPage onAdd={onAdd}/>} />
         <Route path="/orders" element={<OrdersPage/>} />
         <Route path="/my-page" element={<UserPage/>} />
         <Route path="/help" element={<HelpPage/>} />
-        <Route path="/" element={<HomePage setSignupOpen={setSignupOpen}/>} />
+        <Route path="/" element={<HomePage setSignupOpen={setSignupOpen} onAdd={onAdd}/>} />
       </Routes>
       
       <Footer/>

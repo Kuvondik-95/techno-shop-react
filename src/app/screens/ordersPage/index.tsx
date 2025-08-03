@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import OrderService from "../../services/Order.Service";
 import { OrderStatus } from "../../../libs/enums/order.enum";
 import { useGlobals } from "../../hooks/useGlobals";
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { serverApi } from '../../../libs/config';
 import { MemberType } from '../../../libs/enums/member.enum';
 
@@ -34,7 +34,7 @@ export default function OrdersPage() {
     setFinishedOrders
   } = actionDispatch(useDispatch());
   const { orderBuilder, authMember } = useGlobals();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [value, setValue] = useState("1");
   const [orderInquriy, setOrderInquiry] = useState<OrderInquiry>({
     page: 1,
@@ -64,7 +64,9 @@ export default function OrdersPage() {
 
   }, [orderInquriy, orderBuilder]);
 
-
+  if(!authMember) {
+    return <Navigate to="/" replace />;
+  }
   return (
       <div className={"order-page"}>
         <Container className={"order-container"}>  
@@ -108,7 +110,9 @@ export default function OrdersPage() {
                   />
                   
                   <div className={"order-user-icon-box"}>
-                    <img src={
+                    <img
+                        className="order-user-prof-img" 
+                        src={
                           authMember?.memberType === MemberType.OWNER 
                             ? "/icon/ownerBadge.svg"
                             : "/icon/avatar.svg" }  

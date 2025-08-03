@@ -24,7 +24,7 @@ const light = {
 		},
 		text: {
 			primary: '#343434',
-			secondary: '#ff9500ff',
+			secondary: common.black, // this was previous orange color #ff9500ff
 			dark: common.black,
 		},
 	},

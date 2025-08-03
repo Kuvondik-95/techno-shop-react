@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import MemberService from "../../services/Member.service";
 import { useGlobals } from "../../hooks/useGlobals";
 import { Link } from "react-router-dom";
+import { CartItem } from "../../../libs/types/search";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setPopularProducts: (data: Product[]) => dispatch(setPopularProducts(data)),
@@ -27,10 +28,11 @@ const actionDispatch = (dispatch: Dispatch) => ({
 
 interface homePageProps{
   setSignupOpen: (isOpen: boolean) => void;
+  onAdd: (item: CartItem) => void;
 }
 
 export default function HomePage(props: homePageProps){
-  const { setSignupOpen } = props;
+  const { setSignupOpen, onAdd } = props; 
   const { setPopularProducts } = actionDispatch(useDispatch()); 
   const { setNewProducts } = actionDispatch(useDispatch()); 
   const { setTopUsers } = actionDispatch(useDispatch());
@@ -124,8 +126,8 @@ export default function HomePage(props: homePageProps){
     </Container>
   </div>
 
-  <PopularProducts/>
-  <NewProducts/>
+  <PopularProducts onAdd={onAdd}/>
+  <NewProducts onAdd={onAdd}/>
   <News/>
   <Advertisement/>
   <ActiveUsers/>

@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { Product } from "../../../libs/types/product";
 import { serverApi } from "../../../libs/config";
+import { CartItem } from "../../../libs/types/search";
 
 /** REDUX SLICE & SELECTOR **/
 const newProductsRetriever = createSelector(
@@ -31,8 +32,13 @@ const newProductsRetriever = createSelector(
   (newProducts) => ({ newProducts })
 );
 
-export default function NewProducts(){
+interface NewProductsProps{
+  onAdd: (cartItem: CartItem) => void;
+}
+
+export default function NewProducts(props: NewProductsProps){
   const { newProducts } = useSelector(newProductsRetriever);
+  const { onAdd } = props;
 
   return <div className="new-products-section">
     <Container className="new-container">
@@ -74,10 +80,8 @@ export default function NewProducts(){
                       
                       <LinkJoy
                         className="product-name"
-                        href="#product-card"
                         color="neutral"
                         textColor="text.primary"
-                        overlay
                         // endDecorator={<ArrowOutwardIcon />}
                         sx={{ fontWeight: 'md' }}
                       >
@@ -93,7 +97,20 @@ export default function NewProducts(){
                         {product.productPrice}$
                       </TypographyJoy>
                     </CardContent>
-                    <ButtonJoy className="shopping-btn" id="shopping-btn">
+                    <ButtonJoy 
+                      className="shopping-btn" 
+                      id="shopping-btn"
+                      onClick={(e) => {
+                          onAdd({
+                            _id: product._id,
+                            quantity: 1,
+                            name: product.productName,
+                            price: product.productPrice,
+                            image: product.productImages[0]
+                          })
+                          e.stopPropagation();
+                        }}
+                    >
                         Add to cart
                       <ShoppingCartIcon sx={{marginLeft: "6px"}}></ShoppingCartIcon>
                     </ButtonJoy>

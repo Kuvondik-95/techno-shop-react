@@ -14,7 +14,16 @@ SwiperCore.use([Navigation]); // Initialize modules
 
 export default function News(){
   return <div className="news-section">
+
     <Container className="news-container">
+      
+      <Stack className="news-titles">
+        <Typography className="title" variant="h1">
+          News and discounts
+        </Typography>
+        <Link className="view-all" href="#">View all</Link>
+      </Stack>
+      
       <Stack className="news-frame">
         <Swiper
           className="swiper-frame"

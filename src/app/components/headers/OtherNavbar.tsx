@@ -73,24 +73,32 @@ export default function OtherNavbar(props: OtherNavbarProps){
             </Box>
 
             {/* member   */}
-            <Box className={"link-item"}>
-                <NavLink 
-                  to="/orders"
-                  className={({ isActive }) => (isActive ? 'active-link' : '')}
-                >
-                  Orders
-                </NavLink>
-            </Box>
+            {authMember 
+              ? (
+                <Box className={"link-item"}>
+                    <NavLink 
+                      to="/orders"
+                      className={({ isActive }) => (isActive ? 'active-link' : '')}
+                    >
+                      Orders
+                    </NavLink>
+                </Box>
+              ) : (<></>)
+            }
             
             {/* member   */}
-            <Box className={"link-item"}>
-                <NavLink 
-                  to="/my-page"
-                  className={({ isActive }) => (isActive ? 'active-link' : '')}
-                >
-                  My-Page
-                </NavLink>
-            </Box>
+            {authMember 
+              ? (
+                <Box className={"link-item"}>
+                  <NavLink 
+                    to="/my-page"
+                    className={({ isActive }) => (isActive ? 'active-link' : '')}
+                  >
+                    My-Page
+                  </NavLink>
+                </Box>
+                ) : (<></>)
+            }
 
             {/* <Box className={"link-item"}>
                 <NavLink 

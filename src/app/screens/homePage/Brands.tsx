@@ -12,7 +12,7 @@ export default function Brands(){
       <Stack className="brands-frame">
         
         <Stack className="brands-titles">
-          <Typography className="title" variant="h1">Our Brands</Typography>
+          <Typography className="title" variant="h1">Multi-brand retailer</Typography>
           <Link className="view-all" href="#">View all</Link>
         </Stack>
 

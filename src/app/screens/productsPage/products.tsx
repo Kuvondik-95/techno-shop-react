@@ -2,7 +2,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Routes, Route, useLocation } from 'react-router-dom'
 import "../../../css/products.css";
-import { Input, Button as ButtonJoy } from "@mui/joy";
+import { Input, Button as ButtonJoy, Badge } from "@mui/joy";
 import SearchIcon from '@mui/icons-material/Search';
 import { CssVarsProvider } from "@mui/joy/styles";
 
@@ -17,12 +17,13 @@ import {
   Chip, 
   Link as LinkJoy, 
   Typography as TypographyJoy,
-  CircularProgress,
   SvgIcon,
   CardActions
  } from "@mui/joy";
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
@@ -69,16 +70,19 @@ export default function Products(props: ProductsProps){
     productCollection: ProductCollection.SMARTPHONE,
     search: ""
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [searchText, setSearchText] = useState<string>("");
   const history = useNavigate()
 
   useEffect(() => {
     const product = new ProductService();
+    setLoading(true);
     product
     .getProducts(productSearch)
     .then((data)=> {
       setProducts(data);
+      setLoading(false);
     })
     .catch(err => {
       console.log(err);
@@ -128,8 +132,17 @@ export default function Products(props: ProductsProps){
   }
 
   const chooseDishHandler = (id: string) => {
-    history(`/products/${id}`);
+    return history(`/products/${id}`);
   }
+
+  // <Link
+	// 					href={{
+	// 						pathname: '/property/detail',
+	// 						query: { id: property?._id },
+	// 					}}
+	// 				></Link>
+
+  // router.query.id shuni ichidan olinadi
 
   return  (
     <div className="products-section">
@@ -297,7 +310,17 @@ export default function Products(props: ProductsProps){
               <button className="category-btn">RUGGED</button>
               <button className="category-btn">OTHER</button> */}
             </Stack>
-            
+            { loading ? (
+              <Box sx={{ 
+                    width: '100%',
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center' 
+                    }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
             <Stack className="products-frame">
               <CssVarsProvider>
                 {products.length !== 0 ? (products.map((product: Product, index) => {
@@ -315,11 +338,12 @@ export default function Products(props: ProductsProps){
                             src={imagePath}
                             loading="lazy"
                             alt=""
+                            onClick={() => chooseDishHandler(product._id)}
                           />
                       </CardOverflow>
                       <CardContent className="card-content">
                         <TypographyJoy level="body-xs" className="product-category">
-                          {product.productCollection}
+                          {product.productCollection === 'OTHER' ? 'Accessory' : product.productCollection}
                         </TypographyJoy>
                         
                         <LinkJoy
@@ -329,6 +353,7 @@ export default function Products(props: ProductsProps){
                           // overlay
                           // endDecorator={<ArrowOutwardIcon />}
                           sx={{ fontWeight: 'md' }}
+                          onClick={() => chooseDishHandler(product._id)}
                         >
                           {product.productName}
                         </LinkJoy>
@@ -364,6 +389,18 @@ export default function Products(props: ProductsProps){
                           Add to cart
                         <ShoppingCartIcon sx={{marginLeft: "6px"}}></ShoppingCartIcon>
                       </ButtonJoy>
+
+                      {product.productViews > 0 && (
+                        <TypographyJoy  
+                          className={`views-title`} 
+                          endDecorator={<RemoveRedEyeIcon sx={{color: "#bdbdbd"}}/>}
+                        >
+                          {product.productViews}
+                          
+                        </TypographyJoy>
+                      )}  
+                      
+
                     </Card>
                   )})): (
                     <Box className="no-data">Products are not available!</Box>
@@ -371,16 +408,22 @@ export default function Products(props: ProductsProps){
                 }
               </CssVarsProvider>
             </Stack>
+            )}
+
           </Stack>
           <Box className="pagination-box">
             <Pagination
-              count={5}
+              count={products.length !== 0 ? productSearch.page + 1 : productSearch.page}
+              defaultPage={1}
+              page={productSearch.page}
+              color={"primary"}
               renderItem={(item) => (
                 <PaginationItem
                   slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
                   {...item}
                 />
               )}
+              onChange={paginationHandler}
             />
           </Box>
         </Stack>

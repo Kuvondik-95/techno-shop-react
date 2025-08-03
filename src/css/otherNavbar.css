@@ -97,10 +97,10 @@
   width: 100%;
   margin-top: 51px;
   margin-bottom: 50px;
-  background-image: url("/public/img/banner/banner0.avif");
+  background-image: url("/public/img/banner/vack.jpg");
   height: 200px;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 100% auto;
   /* background-size: cover; */
   background-position: 0;
   

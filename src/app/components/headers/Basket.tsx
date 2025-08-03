@@ -119,13 +119,18 @@ export default function Basket(props: BasketProps) {
             { cartItems.length === 0 
             ? (<div>Cart is empty!</div>) 
             : (
-                <Stack flexDirection={"row"}>
+                <Stack 
+                  className="cart-top-box"
+                >
                   <div>Cart Products</div>
-                  <DeleteForeverIcon
-                    sx={{ ml: "5px", cursor:"pointer" }}
-                    color={"primary"}
-                    onClick={() => onDeleteAll()}
-                  />
+                  <Button className="clear-btn" onClick={() => onDeleteAll()}> 
+                    clear
+                    <DeleteForeverIcon
+                      sx={{ ml: "5px", cursor:"pointer" }}
+                      color={"primary"}
+                    />
+                  </Button>
+                  
                 </Stack>
                 ) 
             }
@@ -158,7 +163,11 @@ export default function Basket(props: BasketProps) {
           </Box>
           {cartItems.length !== 0 ? (
             <Box className={"basket-order"}>
-              <span className={"price"}>Total: ${totalPrice} ({itemsPrice} + {shippingCost}) </span>
+              <span 
+                className={"price"}
+              >
+                <b>Total: </b> &nbsp;${totalPrice} &nbsp; (<b>Shipping:</b>&nbsp; {shippingCost}) 
+              </span>
               <Button 
                 onClick={proceedOrderHandler}
                 startIcon={<ShoppingCartIcon />} 

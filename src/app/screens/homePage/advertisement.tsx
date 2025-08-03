@@ -8,7 +8,6 @@ export default function Advertisement(){
   return <div className="adds-section">
     <Container className="adds-container">
       <Stack className="adds-frame">
-
         <Stack className="adds-left">
           <Stack className="adds-left-title">
             <Typography className="title">Cashback for any purchase!</Typography>

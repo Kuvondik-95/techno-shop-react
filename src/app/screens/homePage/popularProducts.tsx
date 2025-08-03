@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Stack, Box, Typography, Button, Link } from "@mui/material";
 import Card from '@mui/joy/Card';
 import { 
@@ -9,13 +9,14 @@ import {
   Link as LinkJoy, 
   Typography as TypographyJoy,
   Button as ButtonJoy,
-  CircularProgress,
   SvgIcon,
   CardActions
  } from "@mui/joy";
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { CssVarsProvider } from "@mui/joy/styles";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import "../../../css/home.css"
 import { retrievePopularProducts } from "./selector";
@@ -23,6 +24,8 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { Product } from "../../../libs/types/product";
 import { serverApi } from "../../../libs/config";
+import { CartItem } from "../../../libs/types/search";
+import Skeleton from '@mui/material/Skeleton';
 
 /** REDUX SLICE & SELECTOR **/
 const popularProductsRetriever = createSelector(
@@ -30,8 +33,14 @@ const popularProductsRetriever = createSelector(
   (popularProducts) => ({ popularProducts })
 );
 
-export default function PopularProducts(){
+interface PopularProductsProps{
+  onAdd: (cartItem: CartItem) => void;
+}
+
+export default function PopularProducts(props: PopularProductsProps){
+  const { onAdd } = props;
   const { popularProducts } = useSelector(popularProductsRetriever);
+  const [loading, setLoading] = useState<boolean>(false);
   // console.log("PopularProducts from Store:", popularProducts);
 
   return <div className="popular-products-section">
@@ -43,13 +52,27 @@ export default function PopularProducts(){
           <Link className="view-all" href="/products">View all</Link>
         </Stack>
 
+        {loading ? (
+          <>
+            <Box sx={{ 
+              width: '100%',
+              height: '100%',
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center' 
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          </>
+        ) : (
         <Stack className="popular-cards-frame">
           <CssVarsProvider>
             {popularProducts.length !== 0 ? 
               (popularProducts.map((product: Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`
                 return(
-                  <Card 
+                    <Card 
                     className="card"
                     sx={{ width: "215px", height: "370px", boxShadow: 'lg' }} 
                     key={product._id}
@@ -70,10 +93,8 @@ export default function PopularProducts(){
                       
                       <LinkJoy
                         className="product-name"
-                        href="#product-card"
                         color="neutral"
                         textColor="text.primary"
-                        overlay
                         // endDecorator={<ArrowOutwardIcon />}
                         sx={{ fontWeight: 'md' }}
                       >
@@ -93,11 +114,31 @@ export default function PopularProducts(){
                         {product.productPrice}$
                       </TypographyJoy>
                     </CardContent>
-                    <ButtonJoy className="shopping-btn">
+                    <ButtonJoy 
+                      className="shopping-btn"
+                      onClick={(e) => {
+                          onAdd({
+                            _id: product._id,
+                            quantity: 1,
+                            name: product.productName,
+                            price: product.productPrice,
+                            image: product.productImages[0]
+                          })
+                          e.stopPropagation();
+                        }}
+                    >
                         Add to cart
                       <ShoppingCartIcon sx={{marginLeft: "6px"}}></ShoppingCartIcon>
                     </ButtonJoy>
+                    <TypographyJoy  
+                      className={`views-title`} 
+                      endDecorator={<RemoveRedEyeIcon sx={{color: "#bdbdbd"}}/>}
+                    >
+                      {product.productViews}
+                      
+                    </TypographyJoy>
                   </Card>
+                  
                   )}
                 )
               ):(
@@ -106,6 +147,9 @@ export default function PopularProducts(){
             }
           </CssVarsProvider>
         </Stack>
+         )
+        }
+
       </Stack>
     </Container>
   </div>
